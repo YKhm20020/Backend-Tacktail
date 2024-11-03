@@ -1,0 +1,59 @@
+services:
+  api:
+    container_name: api
+    build:
+      context: .
+      dockerfile: go.dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    tty: true
+    volumes:
+      - ./app:/go/app
+    networks:
+      - api-db-network
+
+  db:
+    container_name: db
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: db-user
+      POSTGRES_PASSWORD: db-password
+      POSTGRES_DB: db-name
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./sql:/docker-entrypoint-initdb.d
+    networks:
+      - api-db-network
+      - db-pgadmin-network
+
+  pgadmin4:
+    container_name: pgadmin4
+    image: dpage/pgadmin4:8.4
+    ports:
+      - 81:80
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - ./config/servers.json:/pgadmin4/servers.json
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@example.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    depends_on:
+      - db
+    networks:
+      - db-pgadmin-network
+
+volumes:
+  db:
+  pgadmin-data:
+
+networks:
+  api-db-network:
+    external: true
+  db-pgadmin-network:
+    external: true
