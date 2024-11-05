@@ -4,16 +4,12 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
-	"strconv"
 
+	"github.com/KakinokiKanta/go-dev-template/api/controller"
+	"github.com/KakinokiKanta/go-dev-template/infrastructure/repository"
+	"github.com/KakinokiKanta/go-dev-template/usecase"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
-)
-
-var (
-	id int
-	name string
-	password string
 )
 
 func main() {
@@ -35,22 +31,10 @@ func main() {
 		})
 	})
 
-	r.GET("/get", func(ctx *gin.Context) {
-		row := db.QueryRow("SELECT id, name, password FROM accounts;")
-		if row.Err() != nil {
-			ctx.JSON(http.StatusInternalServerError, gin.H{"error": row.Err().Error()})
-			return
-		}
-		err := row.Scan(&id, &name, &password)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, gin.H{"error": err})
-			return
-		}
-		ctx.JSON(http.StatusOK, gin.H{
-			"id": strconv.Itoa(id),
-			"name": name,
-			"password": password,
-		})
-	})
+	userRepository := repository.NewUserRepository(db)
+	createUserUc := usecase.NewCreateUser(userRepository)
+	createUserCon := controller.NewCreateUser(createUserUc)
+
+	r.POST("/users", createUserCon.Execute)
 	r.Run()
 }
