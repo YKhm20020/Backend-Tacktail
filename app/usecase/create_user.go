@@ -25,3 +25,26 @@ type CreateUserOutput struct {
 	Name     string `json:"name"`
 	Password string `json:"password"`
 }
+
+func (uc CreateUser) Execute(input CreateUserInput) (CreateUserOutput, error) {
+	_, err := uc.repo.FindByName(input.Name)
+
+	if err == nil {
+		// TODO: 適切なエラーハンドリング
+		return CreateUserOutput{}, err
+	}
+
+	user := domain.NewUser(ulid.Make().String(), input.Name, input.Password)
+
+	createdUser, err := uc.repo.Create(user)
+
+	if err != nil {
+		return CreateUserOutput{}, err
+	}
+
+	return CreateUserOutput{
+		createdUser.ID(),
+		createdUser.Name(),
+		createdUser.Password(),
+	}, nil
+}
