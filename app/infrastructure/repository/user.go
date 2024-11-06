@@ -35,18 +35,14 @@ func (repo UserRepository) FindByName(name string) (domain.User, error) {
 		SELECT id, name, password FROM users WHERE name=$1;
 	`
 
-	row := repo.db.QueryRow(query, name)
-
-	if err := row.Err(); err != nil {
-		return domain.User{}, errors.New("でーたべーすから値取れず")
-	}
-
 	var dbUser dbUser
-
-	err := row.Scan(&dbUser.id, &dbUser.name, &dbUser.password)
+	err := repo.db.QueryRow(query, name).Scan(&dbUser.id, &dbUser.name, &dbUser.password)
 
 	if err != nil {
-		return domain.User{}, errors.New("DBユーザー型に置き換えれず")
+		if err == sql.ErrNoRows {
+			return domain.User{}, errors.New("not found user")
+		}
+		return domain.User{}, err
 	}
 
 	user := domain.NewUser(dbUser.id, dbUser.name, dbUser.password)

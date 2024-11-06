@@ -1,6 +1,8 @@
 package usecase
 
 import (
+	"errors"
+
 	"github.com/KakinokiKanta/go-dev-template/domain"
 	"github.com/oklog/ulid/v2"
 )
@@ -31,6 +33,10 @@ func (uc CreateUser) Execute(input CreateUserInput) (CreateUserOutput, error) {
 
 	if err == nil {
 		// TODO: 適切なエラーハンドリング
+		return CreateUserOutput{}, errors.New("this name is already registered")
+	}
+
+	if err.Error() != "not found user" {
 		return CreateUserOutput{}, err
 	}
 

@@ -28,7 +28,7 @@ func (con CreateUser) Execute(ctx *gin.Context) {
 	user, err := con.uc.Execute(input)
 
 	if err != nil {
-		if err.Error() == "TODO: 適切なエラー文" {
+		if err.Error() == "this name is already registered" {
 			ctx.JSON(http.StatusBadRequest, gin.H{"error": "This name is already registered"})
 			return
 		}
