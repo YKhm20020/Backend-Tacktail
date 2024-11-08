@@ -1,4 +1,4 @@
-module github.com/KakinokiKanta/go-dev-template
+module github.com/YKhm20020/Backend-Tacktail
 
 go 1.22.1
 
