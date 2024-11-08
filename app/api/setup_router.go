@@ -7,9 +7,6 @@ import (
 	"github.com/YKhm20020/Backend-Tacktail/infrastructure/repository"
 	"github.com/YKhm20020/Backend-Tacktail/usecase"
 	"github.com/gin-gonic/gin"
-
-	"github.com/swaggo/gin-swagger" // gin-swagger middleware
-	// swagger embed files
 )
 
 func SetupRouter(db *sql.DB) {
