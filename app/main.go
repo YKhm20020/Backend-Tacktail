@@ -6,6 +6,10 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// @title gin-swagger todos
+// @version 1.0
+// @license.name kosuke
+// @description このswaggerはgin-swaggerの見本apiです
 func main() {
 	// データベース接続
 	db := infrastructure.SetupDB()

@@ -7,6 +7,11 @@ import (
 	"github.com/YKhm20020/Backend-Tacktail/infrastructure/repository"
 	"github.com/YKhm20020/Backend-Tacktail/usecase"
 	"github.com/gin-gonic/gin"
+
+	_ "gin-swagger-test/docs"
+
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 func SetupRouter(db *sql.DB) {
@@ -21,5 +26,9 @@ func SetupRouter(db *sql.DB) {
 	createUserCon := controller.NewCreateUser(createUserUc)
 
 	r.POST("/users", createUserCon.Execute)
+
+	// swagger ui用
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	r.Run()
 }
