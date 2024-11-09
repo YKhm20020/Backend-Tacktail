@@ -17,16 +17,6 @@ func NewCreateUser(uc usecase.CreateUser) CreateUser {
 	}
 }
 
-// PostTodo ...
-// @Summary 新規Todoを作成
-// @Tags Todo
-// @Accept  json
-// @Produce  json
-// @Param title body string true "title"
-// @Param body body string true "body"
-// @Success 201 {object} responses.SuccessResponse{data=models.Todo}
-// @Failure 400 {object} responses.ErrorResponse
-// @Router /todos [post]
 func (con CreateUser) Execute(ctx *gin.Context) {
 	var input usecase.CreateUserInput
 
