@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(db *sql.DB) *gin.Engine {
+func SetupRouter(db *sql.DB) {
 	r := gin.Default()
 
 	userRepository := repository.NewUserRepository(db)
@@ -18,5 +18,5 @@ func SetupRouter(db *sql.DB) *gin.Engine {
 
 	r.POST("/users", createUserCon.Execute)
 
-	return r
+	r.Run()
 }
