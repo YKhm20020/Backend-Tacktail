@@ -45,3 +45,12 @@ paths:
                   password:
                     type: string
                     format: password
+        "400":
+          description: リクエストが間違い
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
