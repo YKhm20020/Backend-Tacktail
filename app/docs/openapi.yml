@@ -54,3 +54,12 @@ paths:
                 properties:
                   error:
                     type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
