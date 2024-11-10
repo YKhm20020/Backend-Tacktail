@@ -28,6 +28,8 @@ paths:
               properties:
                 name:
                   type: string
+                  minLength: 1
+                  maxLength: 20
                   example: exampleName00
                 password:
                   type: string
