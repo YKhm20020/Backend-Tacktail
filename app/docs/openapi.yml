@@ -4,3 +4,6 @@ info:
   version: 1.0.0
   title: Tacktail Backend API
   description: 自宅でカクテルに挑戦するためのカクテルレシピWebサービスのバックエンドWeb APIです。
+
+servers:
+  - url: http://localhost:8080
