@@ -7,3 +7,41 @@ info:
 
 servers:
   - url: http://localhost:8080
+
+paths:
+  /users:
+    post:
+      description: 新規ユーザー登録を行う
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - password
+              properties:
+                name:
+                  type: string
+                  example: exampleName00
+                password:
+                  type: string
+                  format: password
+                  example: examplePassword00
+      responses:
+        "201":
+          description: 新規ユーザー登録に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  password:
+                    type: string
+                    format: password
