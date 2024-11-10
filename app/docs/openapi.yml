@@ -11,6 +11,8 @@ servers:
 paths:
   /users:
     post:
+      tags:
+        - サインアップ・ログイン
       description: 新規ユーザー登録を行う
       operationId: createUser
       requestBody:
