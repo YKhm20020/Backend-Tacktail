@@ -135,7 +135,7 @@ paths:
                     type: string
 
 components:
-  securitySchemes:
+  securitySchemes:  # 認証が必要なエンドポイントに付加
     cookieAuth:
       description: Cookie認証
       type: apiKey
