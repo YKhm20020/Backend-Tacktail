@@ -3,9 +3,16 @@ package domain
 type Cocktail struct {
 	id          string
 	name        string
-	image       string
+	image       string // ユーザー固有の値
 	description string
 	materials   []Material
+}
+
+type CocktailRepository interface {
+	UpdateCocktailImage(string, string, string) error // 引数はユーザーID、カクテルID、画像パス
+	FindAll() ([]Cocktail, error)                     // すべてのカクテルを取得
+	FindByID(string) (Cocktail, error)                // 引数はカクテルID
+	FindByMaterials([]string) ([]Cocktail, error)     // 引数は材料IDのリスト
 }
 
 func NewCocktail(
