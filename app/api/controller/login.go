@@ -31,9 +31,9 @@ func (con Login) Execute(ctx *gin.Context) {
 	}
 
 	// ログイン処理に成功したか判定
-	user, isLogin := con.uc.Execute(input)
-	if !isLogin {
-		ctx.JSON(http.StatusUnauthorized, gin.H{"error": errors.New("failed to login").Error()})
+	user, err := con.uc.Execute(input)
+	if err != nil {
+		ctx.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
