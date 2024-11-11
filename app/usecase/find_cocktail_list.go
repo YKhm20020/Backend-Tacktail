@@ -3,18 +3,40 @@ package usecase
 import "github.com/YKhm20020/Backend-Tacktail/domain"
 
 type FindCocktailList struct {
-	repo domain.CocktailRepository
+	cocktailRepo domain.CocktailRepository
+	materialRepo domain.MaterialRepository
 }
 
 type FindCocktailListInput struct {
-	MaterialID []string `json:"material_id"`
-	UserID     string   `json:"user_id"`
+	MaterialIDs []string
+	UserID      string
 }
 
 type FindCocktailListOutput []domain.Cocktail
 
-func NewFindCocktailList(repo domain.CocktailRepository) FindCocktailList {
+func NewFindCocktailList(
+	cocktailRepo domain.CocktailRepository,
+	materialRepo domain.MaterialRepository,
+) FindCocktailList {
 	return FindCocktailList{
-		repo: repo,
+		cocktailRepo: cocktailRepo,
+		materialRepo: materialRepo,
 	}
+}
+
+func (uc FindCocktailList) Execute(input FindCocktailListInput) (FindCocktailListOutput, error) {
+	var cocktails []domain.Cocktail
+	var err error
+
+	if len(input.MaterialIDs) <= 0 {
+		cocktails, err = uc.cocktailRepo.FindAll(input.UserID)
+	} else {
+		cocktails, err = uc.cocktailRepo.FindByMaterials(input.UserID, input.MaterialIDs)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return cocktails, nil
 }
