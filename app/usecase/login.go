@@ -24,6 +24,10 @@ func NewLogin(repo domain.UserRepository) Login {
 	}
 }
 
+/*
+ * ここではトークンの生成は行わず、ログインの成否だけを判定する
+ * これにより、認証手段を変更しやすくしている
+ */
 func (uc Login) Execute(input LoginInput) (LoginOutput, bool) {
 	user, err := uc.repo.FindByName(input.Name)
 	if err != nil {
