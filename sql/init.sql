@@ -48,4 +48,14 @@ CREATE TABLE stories (
   FOREIGN KEY (cocktailID) REFERENCES cocktails(id)
 );
 
-INSERT INTO users (id, name, password) VALUES ('akojfdak', 'a1_name', 'a1_password');
+INSERT INTO users (id, name, password) VALUES ('user00_id', 'user00_name', 'user00_password');
+INSERT INTO users (id, name, password) VALUES ('user01_id', 'user01_name', 'user01_password');
+INSERT INTO users (id, name, password) VALUES ('user02_id', 'user02_name', 'user02_password');
+INSERT INTO users (id, name, password) VALUES ('user03_id', 'user03_name', 'user03_password');
+INSERT INTO users (id, name, password) VALUES ('user04_id', 'user04_name', 'user04_password');
+INSERT INTO users (id, name, password) VALUES ('user05_id', 'user05_name', 'user05_password');
+INSERT INTO users (id, name, password) VALUES ('user06_id', 'user06_name', 'user06_password');
+INSERT INTO users (id, name, password) VALUES ('user07_id', 'user07_name', 'user07_password');
+INSERT INTO users (id, name, password) VALUES ('user08_id', 'user08_name', 'user08_password');
+INSERT INTO users (id, name, password) VALUES ('user09_id', 'user09_name', 'user09_password');
+INSERT INTO users (id, name, password) VALUES ('user10_id', 'user10_name', 'user10_password');
