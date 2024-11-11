@@ -18,3 +18,15 @@ func NewLogin(repo domain.UserRepository) Login {
 		repo: repo,
 	}
 }
+
+func (uc Login) Execute(input LoginInput) (LoginOutput, bool) {
+	user, err := uc.repo.FindByName(input.Name)
+	if err != nil {
+		return LoginOutput{}, false
+	}
+
+	return LoginOutput{
+		Id:   user.ID(),
+		Name: user.Name(),
+	}, user.IsValidPassword(input.Password)
+}
