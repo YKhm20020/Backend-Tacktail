@@ -42,34 +42,40 @@ func AuthJWT() gin.HandlerFunc {
 		}
 
 		// トークンからユーザー名を取得し、contextにセット
-		userName, err := extractUserName(token)
+		userName, userID, err := extractUser(token)
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
 				"error":   errors.New("invalid token").Error(),
-				"message": "トークンからユーザー名の取得に失敗",
+				"message": "トークンからユーザー名およびユーザーIDの取得に失敗",
 			})
 			ctx.Abort()
 			return
 		}
 
-		ctx.Set("user", userName)
+		ctx.Set("user_name", userName)
+		ctx.Set("user_id", userID)
 
 		// 認証を突破!!
 		ctx.Next()
 	}
 }
 
-func extractUserName(token *jwt.Token) (string, error) {
+func extractUser(token *jwt.Token) (string, string, error) {
 	claims, ok := token.Claims.(jwt.MapClaims)
 
 	if !ok {
-		return "", nil
+		return "", "", nil
 	}
 
 	userName, ok := claims["user_name"].(string)
-
 	if !ok {
-		return "", nil
+		return "", "", nil
 	}
-	return userName, nil
+
+	userID, ok := claims["user_id"].(string)
+	if !ok {
+		return "", "", nil
+	}
+
+	return userName, userID, nil
 }
