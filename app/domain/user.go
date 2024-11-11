@@ -38,3 +38,9 @@ func (user User) Name() string {
 func (user User) Password() string {
 	return user.password
 }
+
+func (user User) IsValidPassword(password string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(user.password), []byte(password))
+
+	return err != bcrypt.ErrMismatchedHashAndPassword
+}
