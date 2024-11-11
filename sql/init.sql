@@ -71,3 +71,14 @@ INSERT INTO cocktails (id, name, description) VALUES ('cocktail07_id', 'cocktail
 INSERT INTO cocktails (id, name, description) VALUES ('cocktail08_id', 'cocktail08_name', 'cocktail08_description');
 INSERT INTO cocktails (id, name, description) VALUES ('cocktail09_id', 'cocktail09_name', 'cocktail09_description');
 
+INSERT INTO materials (id, name, description) VALUES ('material00_id', 'material00_name', 'material00_description');
+INSERT INTO materials (id, name, description) VALUES ('material01_id', 'material01_name', 'material01_description');
+INSERT INTO materials (id, name, description) VALUES ('material02_id', 'material02_name', 'material02_description');
+INSERT INTO materials (id, name, description) VALUES ('material03_id', 'material03_name', 'material03_description');
+INSERT INTO materials (id, name, description) VALUES ('material04_id', 'material04_name', 'material04_description');
+INSERT INTO materials (id, name, description) VALUES ('material05_id', 'material05_name', 'material05_description');
+INSERT INTO materials (id, name, description) VALUES ('material06_id', 'material06_name', 'material06_description');
+INSERT INTO materials (id, name, description) VALUES ('material07_id', 'material07_name', 'material07_description');
+INSERT INTO materials (id, name, description) VALUES ('material08_id', 'material08_name', 'material08_description');
+INSERT INTO materials (id, name, description) VALUES ('material09_id', 'material09_name', 'material09_description');
+
