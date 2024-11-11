@@ -4,6 +4,7 @@ type Material struct {
 	id          string
 	name        string
 	description string
+	amount      int
 }
 
 type MaterialRepository interface {
@@ -33,4 +34,8 @@ func (material Material) Name() string {
 
 func (material Material) Description() string {
 	return material.description
+}
+
+func (material Material) Amount() int {
+	return material.amount
 }
