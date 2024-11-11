@@ -4,7 +4,6 @@ import (
 	"errors"
 
 	"github.com/YKhm20020/Backend-Tacktail/domain"
-	"github.com/oklog/ulid/v2"
 )
 
 type CreateUser struct {
@@ -39,7 +38,7 @@ func (uc CreateUser) Execute(input CreateUserInput) (CreateUserOutput, error) {
 		return CreateUserOutput{}, err
 	}
 
-	user := domain.NewUser(ulid.Make().String(), input.Name, input.Password)
+	user := domain.NewUser(input.Name, input.Password)
 
 	createdUser, err := uc.repo.Create(user)
 
