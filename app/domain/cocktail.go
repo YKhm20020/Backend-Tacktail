@@ -12,7 +12,7 @@ type CocktailRepository interface {
 	UpdateCocktailImage(string, string, string) error // 引数はユーザーID、カクテルID、画像パス
 	FindAll() ([]Cocktail, error)                     // すべてのカクテルを取得
 	FindByID(string) (Cocktail, error)                // 引数はカクテルID
-	FindByMaterials([]string) ([]Cocktail, error)     // 引数は材料IDのリスト
+	// FindByMaterials([]string) ([]Cocktail, error)     // 引数は材料IDのリスト
 }
 
 func NewCocktail(
