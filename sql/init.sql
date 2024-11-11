@@ -82,3 +82,15 @@ INSERT INTO materials (id, name, description) VALUES ('material07_id', 'material
 INSERT INTO materials (id, name, description) VALUES ('material08_id', 'material08_name', 'material08_description');
 INSERT INTO materials (id, name, description) VALUES ('material09_id', 'material09_name', 'material09_description');
 
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes00_id', 'cocktail00_id', 'material00_id', 2);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', 'cocktail00_id', 'material01_id', 8);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes02_id', 'cocktail01_id', 'material02_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes03_id', 'cocktail01_id', 'material01_id', 7);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes04_id', 'cocktail02_id', 'material03_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes05_id', 'cocktail02_id', 'material04_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes06_id', 'cocktail02_id', 'material00_id', 2);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes07_id', 'cocktail02_id', 'material05_id', 6);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes08_id', 'cocktail03_id', 'material00_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes09_id', 'cocktail03_id', 'material02_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', 'cocktail03_id', 'material06_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes11_id', 'cocktail03_id', 'material07_id', 7);
