@@ -1,5 +1,7 @@
 package domain
 
+import "golang.org/x/crypto/bcrypt"
+
 type User struct {
 	id       string
 	name     string
@@ -12,10 +14,16 @@ type UserRepository interface {
 }
 
 func NewUser(id string, name string, password string) User {
+	// パスワードをハッシュ化
+	hash_pass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return User{}
+	}
+
 	return User{
 		id:       id,
 		name:     name,
-		password: password,
+		password: string(hash_pass),
 	}
 }
 
