@@ -30,11 +30,9 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 20
-                  example: exampleName00
                 password:
                   type: string
                   format: password
-                  example: examplePassword00
       responses:
         "201":
           description: 新規ユーザー登録に成功
@@ -89,11 +87,9 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 20
-                  example: exampleName00
                 password:
                   type: string
                   format: password
-                  example: examplePassword00
       responses:
         "200":
           description: ログインに成功
