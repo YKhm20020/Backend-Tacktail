@@ -6,6 +6,11 @@ type Material struct {
 	description string
 }
 
+type MaterialRepository interface {
+	Find(string) (Material, error)      // 材料IDを指定
+	Finds([]string) ([]Material, error) // 複数の材料IDを指定
+}
+
 func NewMaterial(
 	id string,
 	name string,
