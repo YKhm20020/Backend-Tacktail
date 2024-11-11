@@ -133,3 +133,11 @@ paths:
                 properties:
                   error:
                     type: string
+
+components:
+  securitySchemes:
+    cookieAuth:
+      description: Cookie認証
+      type: apiKey
+      in: cookie
+      name: cookieAuthByJWT
