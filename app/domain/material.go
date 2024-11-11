@@ -17,3 +17,15 @@ func NewMaterial(
 		description: description,
 	}
 }
+
+func (material Material) ID() string {
+	return material.id
+}
+
+func (material Material) Name() string {
+	return material.name
+}
+
+func (material Material) Description() string {
+	return material.description
+}
