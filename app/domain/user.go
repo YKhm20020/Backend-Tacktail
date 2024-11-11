@@ -1,6 +1,9 @@
 package domain
 
-import "golang.org/x/crypto/bcrypt"
+import (
+	"github.com/oklog/ulid/v2"
+	"golang.org/x/crypto/bcrypt"
+)
 
 type User struct {
 	id       string
@@ -13,17 +16,39 @@ type UserRepository interface {
 	FindByName(string) (User, error)
 }
 
-func NewUser(id string, name string, password string) User {
+func NewUser(
+	name string,
+	password string,
+) User {
+	// IDを生成
+	id := ulid.Make().String()
+
 	// パスワードをハッシュ化
 	hash_pass, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return User{}
 	}
 
+	return newUser(id, name, string(hash_pass))
+}
+
+func ReUser(
+	id string,
+	name string,
+	password string,
+) User {
+	return newUser(id, name, password)
+}
+
+func newUser(
+	id string,
+	name string,
+	password string,
+) User {
 	return User{
 		id:       id,
 		name:     name,
-		password: string(hash_pass),
+		password: password,
 	}
 }
 
