@@ -59,3 +59,15 @@ INSERT INTO users (id, name, password) VALUES ('user07_id', 'user07_name', 'user
 INSERT INTO users (id, name, password) VALUES ('user08_id', 'user08_name', 'user08_password');
 INSERT INTO users (id, name, password) VALUES ('user09_id', 'user09_name', 'user09_password');
 INSERT INTO users (id, name, password) VALUES ('user10_id', 'user10_name', 'user10_password');
+
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail00_id', 'cocktail00_name', 'cocktail00_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail01_id', 'cocktail01_name', 'cocktail01_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail02_id', 'cocktail02_name', 'cocktail02_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail03_id', 'cocktail03_name', 'cocktail03_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail04_id', 'cocktail04_name', 'cocktail04_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail05_id', 'cocktail05_name', 'cocktail05_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail06_id', 'cocktail06_name', 'cocktail06_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail07_id', 'cocktail07_name', 'cocktail07_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail08_id', 'cocktail08_name', 'cocktail08_description');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail09_id', 'cocktail09_name', 'cocktail09_description');
+
