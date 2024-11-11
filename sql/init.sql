@@ -25,7 +25,7 @@ CREATE TABLE recipes (
   materialID VARCHAR(100) NOT NULL,
   amount INTEGER NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (cocktailID) REFERENCES cocktails(id)
+  FOREIGN KEY (cocktailID) REFERENCES cocktails(id),
   FOREIGN KEY (materialID) REFERENCES materials(id)
 );
 
@@ -33,9 +33,9 @@ CREATE TABLE cocktail_images (
   id VARCHAR(100) NOT NULL,
   cocktailID VARCHAR(100) NOT NULL,
   userID VARCHAR(100) NOT NULL,
-  description VARCHAR(100) NOT NULL,
+  image VARCHAR(100) NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (cocktailID) REFERENCES cocktails(id)
+  FOREIGN KEY (cocktailID) REFERENCES cocktails(id),
   FOREIGN KEY (userID) REFERENCES users(id)
 );
 
@@ -92,7 +92,7 @@ INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes06_id',
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes07_id', 'cocktail02_id', 'material05_id', 6);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes08_id', 'cocktail03_id', 'material00_id', 1);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes09_id', 'cocktail03_id', 'material02_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', 'cocktail03_id', 'material06_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes10_id', 'cocktail03_id', 'material06_id', 1);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes11_id', 'cocktail03_id', 'material07_id', 7);
 
 INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image00_id', 'cocktail00_id', 'user00_id', '/images/image00_cocktail00_user00');
