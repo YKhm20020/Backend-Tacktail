@@ -95,6 +95,11 @@ INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes09_id',
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', 'cocktail03_id', 'material06_id', 1);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes11_id', 'cocktail03_id', 'material07_id', 7);
 
-INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image00_id', 'cocktail00_id', 'user00_id', "/images/image00_cocktail00_user00");
-INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image01_id', 'cocktail01_id', 'user00_id', "/images/image01_cocktail01_user00");
-INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image02_id', 'cocktail00_id', 'user01_id', "/images/image02_cocktail00_user01");
+INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image00_id', 'cocktail00_id', 'user00_id', '/images/image00_cocktail00_user00');
+INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image01_id', 'cocktail01_id', 'user00_id', '/images/image01_cocktail01_user00');
+INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image02_id', 'cocktail00_id', 'user01_id', '/images/image02_cocktail00_user01');
+
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story00_id', 'cocktail00_id', 'trivia00', 1);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story01_id', 'cocktail01_id', 'trivia01', 2);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story02_id', 'cocktail02_id', 'trivia02', 3);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story03_id', 'cocktail03_id', 'trivia03', 4);
