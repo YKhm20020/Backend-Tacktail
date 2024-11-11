@@ -30,11 +30,9 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 20
-                  example: exampleName00
                 password:
                   type: string
                   format: password
-                  example: examplePassword00
       responses:
         "201":
           description: 新規ユーザー登録に成功
@@ -68,3 +66,74 @@ paths:
                 properties:
                   error:
                     type: string
+
+  /login:
+    post:
+      tags:
+        - サインアップ・ログイン
+      description: ログイン処理
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - password
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 20
+                password:
+                  type: string
+                  format: password
+      responses:
+        "200":
+          description: ログインに成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+        "400":
+          description: リクエストが間違い
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "401":
+          description: 認証失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+components:
+  securitySchemes:  # 認証が必要なエンドポイントに付加
+    cookieAuth:
+      description: Cookie認証
+      type: apiKey
+      in: cookie
+      name: cookieAuthByJWT

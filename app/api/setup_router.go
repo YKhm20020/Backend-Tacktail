@@ -12,10 +12,20 @@ import (
 func SetupRouter(db *sql.DB) {
 	r := gin.Default()
 
+	// users
+	// リポジトリ
 	userRepository := repository.NewUserRepository(db)
+	// ユースケース
 	createUserUc := usecase.NewCreateUser(userRepository)
+	loginUc := usecase.NewLogin(userRepository)
+	// コントローラー
 	createUserCon := controller.NewCreateUser(createUserUc)
+	loginCon := controller.NewLogin(loginUc)
 
+	// /login
+	r.POST("/login", loginCon.Execute)
+
+	// /users
 	r.POST("/users", createUserCon.Execute)
 
 	r.Run()
