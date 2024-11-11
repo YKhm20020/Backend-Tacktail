@@ -13,6 +13,11 @@ type LoginInput struct {
 	Password string `json:"password" binding:"required,min=1"`
 }
 
+type LoginOutput struct {
+	Id   string `json:"id"`
+	Name string `json:"name"`
+}
+
 func NewLogin(repo domain.UserRepository) Login {
 	return Login{
 		repo: repo,
