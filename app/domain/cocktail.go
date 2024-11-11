@@ -9,10 +9,10 @@ type Cocktail struct {
 }
 
 type CocktailRepository interface {
-	UpdateCocktailImage(string, string, string) error // 引数はユーザーID、カクテルID、画像パス
-	FindAll() ([]Cocktail, error)                     // すべてのカクテルを取得
-	FindByID(string) (Cocktail, error)                // 引数はカクテルID
-	// FindByMaterials([]string) ([]Cocktail, error)     // 引数は材料IDのリスト
+	UpdateCocktailImage(string, string, string) error     // 引数はユーザーID、カクテルID、画像パス
+	FindAll(string) ([]Cocktail, error)                   // 引数はユーザーIDで、すべてのカクテルを取得
+	FindByMaterials(string, []string) ([]Cocktail, error) // 引数はユーザーIDと材料IDのリスト
+	// FindByID(string) (Cocktail, error)                    // 引数はカクテルID
 }
 
 func NewCocktail(
