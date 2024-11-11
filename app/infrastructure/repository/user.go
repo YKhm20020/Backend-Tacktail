@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/KakinokiKanta/go-dev-template/domain"
+	"github.com/YKhm20020/Backend-Tacktail/domain"
 )
 
 type UserRepository struct {

@@ -3,7 +3,7 @@ package usecase
 import (
 	"errors"
 
-	"github.com/KakinokiKanta/go-dev-template/domain"
+	"github.com/YKhm20020/Backend-Tacktail/domain"
 	"github.com/oklog/ulid/v2"
 )
 
@@ -32,7 +32,6 @@ func (uc CreateUser) Execute(input CreateUserInput) (CreateUserOutput, error) {
 	_, err := uc.repo.FindByName(input.Name)
 
 	if err == nil {
-		// TODO: 適切なエラーハンドリング
 		return CreateUserOutput{}, errors.New("this name is already registered")
 	}
 

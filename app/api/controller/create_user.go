@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	"github.com/KakinokiKanta/go-dev-template/usecase"
+	"github.com/YKhm20020/Backend-Tacktail/usecase"
 	"github.com/gin-gonic/gin"
 )
 
