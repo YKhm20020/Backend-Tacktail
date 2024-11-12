@@ -27,7 +27,8 @@ func (repo CocktailRepository) UpdateCocktailImage(
 func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error) {
 	query := `
 		SELECT
-		cocktails.id, cocktails.name, materials.name, cocktail_images.image
+		cocktails.id, cocktails.name, cocktails.description, cocktail_images.image,
+			materials.id, materials.name, materials.description, recipes.amount
 		FROM
 		cocktails
 		LEFT JOIN
