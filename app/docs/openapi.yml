@@ -131,7 +131,7 @@ paths:
                     type: string
 
   /cocktails/list:
-    post:
+    get:
       tags:
         - カクテル
       description: カクテル一覧の取得
@@ -180,14 +180,18 @@ paths:
                     type: string
 
   /auth/cocktails/list:
-    post:
+    get:
       tags:
         - カクテル
       description: 認証ユーザーによるカクテル一覧の取得
       operationId: getCocktailsByAuth
+      security:
+        - cookieAuth: ["/loginでログインすることでcookieにJWTがセットされていること"]
+      
       parameters:
       - in: query
         name: materials
+        description: materials={材料ID}の形式で取得するカクテル一覧にフィルターを付けられる
         required: false
         schema:
           type: string
