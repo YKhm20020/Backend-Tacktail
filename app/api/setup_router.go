@@ -71,8 +71,8 @@ func SetupRouter(db *sql.DB) {
 	r.POST("/users", createUserCon.Execute)
 
 	// /cocktails
-	r.GET("/cocktails", findCocktailListCon.Execute)          // 認証なしでカクテル一覧取得
-	authRouter.GET("/cocktails", findCocktailListCon.Execute) // 認証ありでカクテル一覧取得
+	r.GET("/cocktails/list", findCocktailListCon.Execute)          // 認証なしでカクテル一覧取得
+	authRouter.GET("/cocktails/list", findCocktailListCon.Execute) // 認証ありでカクテル一覧取得
 
 	r.Run()
 }
