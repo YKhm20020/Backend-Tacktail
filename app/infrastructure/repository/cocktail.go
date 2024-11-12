@@ -25,7 +25,7 @@ func (repo CocktailRepository) UpdateCocktailImage(
 	return nil
 }
 
-func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error) {
+func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktail, error) {
 	query := `
 		SELECT
 		cocktails.id, cocktails.name, cocktails.description, cocktail_images.image,
@@ -50,24 +50,27 @@ func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error)
 
 	rows, err := repo.db.Query(query, userID)
 	if err != nil {
-		return []domain.Cocktail{}, err
+		// return []domain.Cocktail{}, err
+		return nil, err
 	}
 
-	// カクテル一覧を格納する変数
-	var cocktails []domain.Cocktail
-	// カクテルに対する材料一覧を格納する変数
-	var materials []domain.Material
+	// // カクテル一覧を格納する変数
+	// var cocktails []domain.Cocktail
+	// // カクテルに対する材料一覧を格納する変数
+	// var materials []domain.Material
 
 	// クエリの実行結果をバインドするための変数
 	var dbCocktail dbCocktail
 	var dbMaterial dbMaterial
 	var dbCocktailImage dbCocktailImage
 	var dbRecipe dbRecipe
-	// カクテルに材料のリストを持たせるため、カクテルIDは別で宣言
-	cocktailID := ""
+
+	// カクテルIDからカクテル構造体へのマップ
+	cocktailMap := make(map[string]domain.Cocktail)
+	// カクテルIDから材料構造体へのマップ
+	materialMap := make(map[string][]domain.Material)
 
 	for rows.Next() {
-		fmt.Println(cocktailID)
 		rows.Scan(
 			&dbCocktail.id,
 			&dbCocktail.name,
@@ -79,22 +82,17 @@ func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error)
 			&dbRecipe.amount,
 		)
 
-		fmt.Println(cocktailID, dbCocktail.id)
+		// 材料ドメインのオブジェクトを生成
+		material := domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount)
+		// マップへ紐づけ
+		materialMap[dbCocktail.id] = append(materialMap[dbCocktail.id], material)
 
-		if cocktailID == "" || dbCocktail.id == cocktailID {
-			material := domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount)
-			materials = append(materials, material)
-			fmt.Println("material: ", material)
-		} else {
-			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image.String, materials)
-			cocktails = append(cocktails, cocktail)
-
-			materials = nil
-
-			fmt.Println("cocktail: ", cocktail)
+		if _, ok := cocktailMap[dbCocktail.id]; !ok {
+			// カクテルドメインのオブジェクトを生成
+			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image.String, materialMap[dbCocktail.id])
+			// マップへ紐づけ
+			cocktailMap[dbCocktail.id] = cocktail
 		}
-
-		cocktailID = dbCocktail.id
 	}
 
 	// TODO: 確認用、後で消す
