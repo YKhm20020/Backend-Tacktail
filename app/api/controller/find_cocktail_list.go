@@ -20,8 +20,8 @@ func NewFindCocktailList(uc usecase.FindCocktailList) FindCocktailList {
 func (con FindCocktailList) Execute(ctx *gin.Context) {
 	var input usecase.FindCocktailListInput
 
-	// /cocktail/list?materials[]={material_id}?materials[]={material_id} でフィルターできるようにするため
-	input.MaterialIDs = ctx.QueryArray("materials[]")
+	// /cocktails/list?materials={material_id}?materials={material_id} でフィルターできるようにするため
+	input.MaterialIDs = ctx.QueryArray("materials")
 
 	// cookieからユーザーIDを取得
 	user_id, exists := ctx.Get("user_id")
