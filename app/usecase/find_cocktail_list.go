@@ -1,6 +1,10 @@
 package usecase
 
-import "github.com/YKhm20020/Backend-Tacktail/domain"
+import (
+	"fmt"
+
+	"github.com/YKhm20020/Backend-Tacktail/domain"
+)
 
 type FindCocktailList struct {
 	cocktailRepo domain.CocktailRepository
@@ -29,8 +33,10 @@ func (uc FindCocktailList) Execute(input FindCocktailListInput) (FindCocktailLis
 	var err error
 
 	if len(input.MaterialIDs) <= 0 {
+		fmt.Println("FindAllが呼び出されたよ")
 		cocktails, err = uc.cocktailRepo.FindAll(input.UserID)
 	} else {
+		fmt.Println("FindByMaterialsが呼び出されたよ")
 		cocktails, err = uc.cocktailRepo.FindByMaterials(input.UserID, input.MaterialIDs)
 	}
 
