@@ -2,11 +2,13 @@ package api
 
 import (
 	"database/sql"
+	"time"
 
 	"github.com/YKhm20020/Backend-Tacktail/api/controller"
 	"github.com/YKhm20020/Backend-Tacktail/api/middleware"
 	"github.com/YKhm20020/Backend-Tacktail/infrastructure/repository"
 	"github.com/YKhm20020/Backend-Tacktail/usecase"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -22,6 +24,34 @@ func SetupRouter(db *sql.DB) {
 	loginCon := controller.NewLogin(loginUc)
 
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		// 許可するHTTPメソッド一覧
+		AllowMethods: []string{
+			"POST",
+			"GET",
+			"OPTIONS",
+		},
+		// 許可するHTTPリクエストヘッダ一覧
+		AllowHeaders: []string{
+			"Access-Control-Allow-Credentials",
+			"Access-Control-Allow-Headers",
+			"Content-Type",
+			// "Content-Length",
+			// "Accept-Encoding",
+			// "Authorization",
+			// "accessToken",
+			"Set-Cookie",
+			"Cookie",
+		},
+		AllowOrigins: []string{
+			"http://localhost:5173",
+			"https://frontend-festival-booth.vercel.app",
+		},
+		// cookieなどの情報を必要とするかどうか
+		AllowCredentials: true, // 本番環境でないと動かない
+		MaxAge:           24 * time.Hour,
+	}))
 
 	// cocktails
 	// リポジトリ
