@@ -2,8 +2,10 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/YKhm20020/Backend-Tacktail/domain"
+	"github.com/lib/pq"
 )
 
 type CocktailRepository struct {
@@ -105,7 +107,7 @@ func (repo CocktailRepository) FindByMaterials(
 		ON
 			cocktails.id = cocktail_images.cocktailID
 		AND
-			cocktail_images.userID = ''
+			cocktail_images.userID = $1
 		INNER JOIN
 			recipes
 		ON
@@ -123,13 +125,13 @@ func (repo CocktailRepository) FindByMaterials(
 				FROM
 					recipes
 				WHERE
-					recipes.materialID
-				IN
-					('material01_id', 'material02_id')
-			)
+					recipes.materialID = ANY($2)
+			);
 	`
 
-	rows, err := repo.db.Query(query, userID)
+	fmt.Println(materialIDs)
+
+	rows, err := repo.db.Query(query, userID, pq.Array(materialIDs))
 	if err != nil {
 		// return []domain.Cocktail{}, err
 		return nil, err
