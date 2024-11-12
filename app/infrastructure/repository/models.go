@@ -1,5 +1,7 @@
 package repository
 
+import "database/sql"
+
 type dbUser struct {
 	id       string
 	name     string
@@ -23,7 +25,7 @@ type dbCocktailImage struct {
 	id         string
 	cocktailID string
 	userID     string
-	image      string
+	image      sql.NullString
 }
 
 type dbMaterial struct {
