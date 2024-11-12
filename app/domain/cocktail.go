@@ -3,8 +3,8 @@ package domain
 type Cocktail struct {
 	id          string
 	name        string
-	image       string // ユーザー固有の値
 	description string
+	image       string // ユーザー固有の値
 	materials   []Material
 }
 
@@ -18,15 +18,15 @@ type CocktailRepository interface {
 func NewCocktail(
 	id string,
 	name string,
-	image string,
 	description string,
+	image string,
 	materials []Material,
 ) Cocktail {
 	return Cocktail{
 		id:          id,
 		name:        name,
-		image:       image,
 		description: description,
+		image:       image,
 		materials:   materials,
 	}
 }
@@ -39,12 +39,12 @@ func (cocktail Cocktail) Name() string {
 	return cocktail.name
 }
 
-func (cocktail Cocktail) Image() string {
-	return cocktail.image
-}
-
 func (cocktail Cocktail) Description() string {
 	return cocktail.description
+}
+
+func (cocktail Cocktail) Image() string {
+	return cocktail.image
 }
 
 func (cocktail Cocktail) Materials() []Material {
