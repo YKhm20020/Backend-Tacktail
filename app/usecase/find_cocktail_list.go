@@ -41,7 +41,7 @@ func NewFindCocktailList(
 	}
 }
 
-func (uc FindCocktailList) Execute(input FindCocktailListInput) (FindCocktailListOutput, error) {
+func (uc FindCocktailList) Execute(input FindCocktailListInput) ([]FindCocktailListOutput, error) {
 	var cocktails []domain.Cocktail
 	var err error
 
@@ -57,5 +57,28 @@ func (uc FindCocktailList) Execute(input FindCocktailListInput) (FindCocktailLis
 		return nil, err
 	}
 
-	return cocktails, nil
+	outputCocktails := []FindCocktailListOutput{}
+
+	// ドメインオブジェクトを出力用DTOに変換する
+	for _, cocktail := range cocktails {
+		outputMaterials := []Material{}
+		for _, material := range cocktail.Materials() {
+			outputMaterials = append(outputMaterials, Material{
+				material.ID(),
+				material.Name(),
+				material.Description(),
+				material.Amount(),
+			})
+		}
+
+		outputCocktails = append(outputCocktails, FindCocktailListOutput{
+			cocktail.ID(),
+			cocktail.Name(),
+			cocktail.Description(),
+			cocktail.Image(),
+			outputMaterials,
+		})
+	}
+
+	return outputCocktails, nil
 }
