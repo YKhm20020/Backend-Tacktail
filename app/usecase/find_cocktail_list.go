@@ -16,7 +16,20 @@ type FindCocktailListInput struct {
 	UserID      string
 }
 
-type FindCocktailListOutput []domain.Cocktail
+type FindCocktailListOutput struct {
+	ID          string     `json:"id"`
+	Name        string     `json:"name"`
+	Description string     `json:"description"`
+	Image       string     `json:"image"`
+	Materials   []Material `json:"materials"`
+}
+
+type Material struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Amount      int    `json:"amount"`
+}
 
 func NewFindCocktailList(
 	repo domain.CocktailRepository,
