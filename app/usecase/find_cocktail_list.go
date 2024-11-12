@@ -7,8 +7,8 @@ import (
 )
 
 type FindCocktailList struct {
-	cocktailRepo domain.CocktailRepository
-	materialRepo domain.MaterialRepository
+	repo domain.CocktailRepository
+	// materialRepo domain.MaterialRepository
 }
 
 type FindCocktailListInput struct {
@@ -19,12 +19,12 @@ type FindCocktailListInput struct {
 type FindCocktailListOutput []domain.Cocktail
 
 func NewFindCocktailList(
-	cocktailRepo domain.CocktailRepository,
-	materialRepo domain.MaterialRepository,
+	repo domain.CocktailRepository,
+	// materialRepo domain.MaterialRepository,
 ) FindCocktailList {
 	return FindCocktailList{
-		cocktailRepo: cocktailRepo,
-		materialRepo: materialRepo,
+		repo: repo,
+		// materialRepo: materialRepo,
 	}
 }
 
@@ -34,10 +34,10 @@ func (uc FindCocktailList) Execute(input FindCocktailListInput) (FindCocktailLis
 
 	if len(input.MaterialIDs) <= 0 {
 		fmt.Println("FindAllが呼び出されたよ")
-		cocktails, err = uc.cocktailRepo.FindAll(input.UserID)
+		cocktails, err = uc.repo.FindAll(input.UserID)
 	} else {
 		fmt.Println("FindByMaterialsが呼び出されたよ")
-		cocktails, err = uc.cocktailRepo.FindByMaterials(input.UserID, input.MaterialIDs)
+		cocktails, err = uc.repo.FindByMaterials(input.UserID, input.MaterialIDs)
 	}
 
 	if err != nil {
