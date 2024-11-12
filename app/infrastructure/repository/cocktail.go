@@ -54,11 +54,6 @@ func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktai
 		return nil, err
 	}
 
-	// // カクテル一覧を格納する変数
-	// var cocktails []domain.Cocktail
-	// // カクテルに対する材料一覧を格納する変数
-	// var materials []domain.Material
-
 	// クエリの実行結果をバインドするための変数
 	var dbCocktail dbCocktail
 	var dbMaterial dbMaterial
@@ -87,20 +82,13 @@ func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktai
 		// マップへ紐づけ
 		materialMap[dbCocktail.id] = append(materialMap[dbCocktail.id], material)
 
-		if _, ok := cocktailMap[dbCocktail.id]; !ok {
 			// カクテルドメインのオブジェクトを生成
 			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image.String, materialMap[dbCocktail.id])
 			// マップへ紐づけ
 			cocktailMap[dbCocktail.id] = cocktail
 		}
-	}
 
-	// TODO: 確認用、後で消す
-	for _, contents := range cocktails {
-		fmt.Println(contents)
-	}
-
-	return cocktails, nil
+	return cocktailMap, nil
 }
 
 func (repo CocktailRepository) FindByMaterials(
