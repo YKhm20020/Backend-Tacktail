@@ -42,7 +42,7 @@ func NewFindCocktailList(
 }
 
 func (uc FindCocktailList) Execute(input FindCocktailListInput) ([]FindCocktailListOutput, error) {
-	var cocktails []domain.Cocktail
+	var cocktails map[string]domain.Cocktail
 	var err error
 
 	if len(input.MaterialIDs) <= 0 {
