@@ -79,30 +79,22 @@ func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error)
 			&dbRecipe.amount,
 		)
 
-		fmt.Println(
-			dbCocktail.id,
-			dbCocktail.name,
-			dbCocktail.description,
-			dbCocktailImage.image,
-			dbMaterial.id,
-			dbMaterial.name,
-			dbMaterial.description,
-			dbRecipe.amount,
-		)
+		fmt.Println(cocktailID, dbCocktail.id)
 
 		if cocktailID == "" || dbCocktail.id == cocktailID {
 			material := domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount)
 			materials = append(materials, material)
-			fmt.Println(material)
+			fmt.Println("material: ", material)
 		} else {
-			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image, materials)
+			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image.String, materials)
 			cocktails = append(cocktails, cocktail)
 
-			cocktailID = dbCocktail.id
 			materials = nil
 
-			fmt.Println(cocktail)
+			fmt.Println("cocktail: ", cocktail)
 		}
+
+		cocktailID = dbCocktail.id
 	}
 
 	// TODO: 確認用、後で消す
@@ -173,7 +165,7 @@ func (repo CocktailRepository) FindByMaterials(
 			material := domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount)
 			materials = append(materials, material)
 		} else {
-			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image, materials)
+			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image.String, materials)
 			cocktails = append(cocktails, cocktail)
 
 			cocktailID = dbCocktail.id
