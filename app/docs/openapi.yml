@@ -179,6 +179,55 @@ paths:
                   error:
                     type: string
 
+  /auth/cocktails/list:
+    post:
+      tags:
+        - カクテル
+      description: 認証ユーザーによるカクテル一覧の取得
+      operationId: getCocktailsByAuth
+      parameters:
+      - in: query
+        name: materials
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: カクテル一覧の取得に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  materials:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      description:
+                        type: string
+                      amount:
+                        type: integer
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
 components:
   securitySchemes:  # 認証が必要なエンドポイントに付加
     cookieAuth:
