@@ -19,7 +19,7 @@ type dbRecipe struct {
 	amount     int
 }
 
-type dbImage struct {
+type dbCocktailImage struct {
 	id         string
 	cocktailID string
 	userID     string
