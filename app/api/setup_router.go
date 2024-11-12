@@ -45,7 +45,7 @@ func SetupRouter(db *sql.DB) {
 			"Cookie",
 		},
 		AllowOrigins: []string{
-			"http://localhost:5173",
+			"http://localhost:3000",
 			"https://frontend-festival-booth.vercel.app",
 		},
 		// cookieなどの情報を必要とするかどうか
