@@ -67,6 +67,7 @@ func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error)
 	cocktailID := ""
 
 	for rows.Next() {
+		fmt.Println(cocktailID)
 		rows.Scan(
 			&dbCocktail.id,
 			&dbCocktail.name,
@@ -78,15 +79,29 @@ func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error)
 			&dbRecipe.amount,
 		)
 
+		fmt.Println(
+			dbCocktail.id,
+			dbCocktail.name,
+			dbCocktail.description,
+			dbCocktailImage.image,
+			dbMaterial.id,
+			dbMaterial.name,
+			dbMaterial.description,
+			dbRecipe.amount,
+		)
+
 		if cocktailID == "" || dbCocktail.id == cocktailID {
 			material := domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount)
 			materials = append(materials, material)
+			fmt.Println(material)
 		} else {
 			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image, materials)
 			cocktails = append(cocktails, cocktail)
 
 			cocktailID = dbCocktail.id
 			materials = nil
+
+			fmt.Println(cocktail)
 		}
 	}
 
