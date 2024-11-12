@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"fmt"
 
 	"github.com/YKhm20020/Backend-Tacktail/domain"
 )
@@ -47,7 +48,54 @@ func (repo CocktailRepository) FindAll(userID string) ([]domain.Cocktail, error)
 		recipes.materialID = materials.id
 	`
 
-	return []domain.Cocktail{}, nil
+	rows, err := repo.db.Query(query, userID)
+	if err != nil {
+		return []domain.Cocktail{}, err
+	}
+
+	// カクテル一覧を格納する変数
+	var cocktails []domain.Cocktail
+	// カクテルに対する材料一覧を格納する変数
+	var materials []domain.Material
+
+	// クエリの実行結果をバインドするための変数
+	var dbCocktail dbCocktail
+	var dbMaterial dbMaterial
+	var dbCocktailImage dbCocktailImage
+	var dbRecipe dbRecipe
+	// カクテルに材料のリストを持たせるため、カクテルIDは別で宣言
+	cocktailID := ""
+
+	for rows.Next() {
+		rows.Scan(
+			&dbCocktail.id,
+			&dbCocktail.name,
+			&dbCocktail.description,
+			&dbCocktailImage.image,
+			&dbMaterial.id,
+			&dbMaterial.name,
+			&dbMaterial.description,
+			&dbRecipe.amount,
+		)
+
+		if cocktailID == "" || dbCocktail.id == cocktailID {
+			material := domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount)
+			materials = append(materials, material)
+		} else {
+			cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image, materials)
+			cocktails = append(cocktails, cocktail)
+
+			cocktailID = dbCocktail.id
+			materials = nil
+		}
+	}
+
+	// TODO: 確認用、後で消す
+	for _, contents := range cocktails {
+		fmt.Println(contents)
+	}
+
+	return cocktails, nil
 }
 
 func (repo CocktailRepository) FindByMaterials(
