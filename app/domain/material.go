@@ -16,11 +16,13 @@ func NewMaterial(
 	id string,
 	name string,
 	description string,
+	amount int,
 ) Material {
 	return Material{
 		id:          id,
 		name:        name,
 		description: description,
+		amount:      amount,
 	}
 }
 
