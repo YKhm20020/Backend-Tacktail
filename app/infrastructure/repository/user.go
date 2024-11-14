@@ -65,7 +65,7 @@ func (repo UserRepository) FindByID(id string) (domain.User, error) {
 		return domain.User{}, err
 	}
 
-	user := domain.ReUser(dbUser.id, dbUser.name, dbUser.password)
+	user := domain.ReUser(dbUser.id, dbUser.name, dbUser.password, dbUser.story)
 
 	return user, nil
 }
