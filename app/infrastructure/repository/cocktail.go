@@ -44,6 +44,8 @@ func (repo CocktailRepository) UpdateCocktailImage(
 	query := `
 		UPDATE cocktail_images SET image = $1 WHERE id = $2;
 	`
+
+	// fmt.Println(image, cocktailImageID)
 	_, err := repo.db.Exec(query, image, cocktailImageID)
 
 	if err != nil {
@@ -219,5 +221,5 @@ func (repo CocktailRepository) FindImage(
 		return "", err
 	}
 
-	return cocktailID, nil
+	return dbCocktailImage.id, nil
 }
