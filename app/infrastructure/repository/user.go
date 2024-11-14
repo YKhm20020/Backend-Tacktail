@@ -30,6 +30,20 @@ func (repo UserRepository) Create(user domain.User) (domain.User, error) {
 	return user, nil
 }
 
+func (repo UserRepository) UpdateStory(id string) error {
+	query := `
+		UPDATE users SET story = story + 1 WHERE id = $1;
+	`
+
+	_, err := repo.db.Exec(query, id)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (repo UserRepository) FindByName(name string) (domain.User, error) {
 	query := `
 		SELECT id, name, password, story FROM users WHERE name=$1;
@@ -56,7 +70,7 @@ func (repo UserRepository) FindByID(id string) (domain.User, error) {
 	`
 
 	var dbUser dbUser
-	err := repo.db.QueryRow(query, name).Scan(&dbUser.id, &dbUser.name, &dbUser.password)
+	err := repo.db.QueryRow(query, id).Scan(&dbUser.id, &dbUser.name, &dbUser.password, &dbUser.story)
 
 	if err != nil {
 		if err == sql.ErrNoRows {
