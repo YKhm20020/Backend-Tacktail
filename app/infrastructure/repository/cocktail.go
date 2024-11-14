@@ -26,9 +26,12 @@ func (repo CocktailRepository) InsertCocktailImage(
 	image string,
 ) (string, error) {
 	query := `
-		INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ($1, $2, $3, $4);
+		INSERT INTO
+			cocktail_images (id, cocktailID, userID, image)
+		VALUES
+			($1, $2, $3, $4);
 	`
-	_, err := repo.db.Exec(query, cocktailImageID, userID, cocktailID, image)
+	_, err := repo.db.Exec(query, cocktailImageID, cocktailID, userID, image)
 
 	if err != nil {
 		return "", err
