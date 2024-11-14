@@ -125,7 +125,18 @@ func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktai
 }
 
 func (repo CocktailRepository) FindByID(id string, userID string) (domain.Cocktail, error) {
+	// 引数のカクテルIDと一致するレコードが存在するかをチェック
 	query := `
+		SELECT id FROM cocktails WHERE id = $1;
+	`
+
+	var cocktailID string
+	if err := repo.db.QueryRow(query, id).Scan(&cocktailID); err != nil {
+		return domain.Cocktail{}, err
+	}
+
+	// カクテルIDとユーザーIDからカクテル情報を取得
+	query = `
 		SELECT
 			cocktails.id, cocktails.name, cocktails.description, cocktail_images.image,
 				materials.id, materials.name, materials.description, recipes.amount
