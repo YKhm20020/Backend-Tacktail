@@ -124,7 +124,7 @@ func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktai
 	return cocktailMap, nil
 }
 
-func (repo CocktailRepository) FindByID(id string) (domain.Cocktail, error) {
+func (repo CocktailRepository) FindByID(id string, userID string) (domain.Cocktail, error) {
 	query := `
 		SELECT
 			cocktails.id, cocktails.name, cocktails.description, cocktail_images.image,
@@ -146,10 +146,10 @@ func (repo CocktailRepository) FindByID(id string) (domain.Cocktail, error) {
 		ON
 			recipes.materialID = materials.id
 		WHERE
-			cocktails.id = $1;
+			cocktails.id = $2;
 	`
 
-	rows, err := repo.db.Query(query, id)
+	rows, err := repo.db.Query(query, userID, id)
 	if err != nil {
 		return domain.Cocktail{}, err
 	}
