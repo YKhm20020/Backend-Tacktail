@@ -26,3 +26,17 @@ func NewFindUser(
 		repo: repo,
 	}
 }
+
+func (uc FindUser) Execute(input FindUserInput) (FindUserOutput, error) {
+	user, err := uc.repo.FindByID(input.ID)
+	if err != nil {
+		return FindUserOutput{}, err
+	}
+
+	return FindUserOutput{
+		user.ID(),
+		user.Name(),
+		user.Password(),
+		user.Story(),
+	}, nil
+}
