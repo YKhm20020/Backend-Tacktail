@@ -19,19 +19,17 @@ func NewCocktailRepository(db *sql.DB) domain.CocktailRepository {
 }
 
 func (repo CocktailRepository) InsertCocktailImage(
-	userID string,
-	cocktailID string,
+	cocktailImageID string,
 	image string,
-) error {
-	return nil
+) (string, error) {
+	return cocktailImageID, nil
 }
 
 func (repo CocktailRepository) UpdateCocktailImage(
-	userID string,
-	cocktailID string,
+	cocktailImageID string,
 	image string,
-) error {
-	return nil
+) (string, error) {
+	return cocktailImageID, nil
 }
 
 func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktail, error) {
@@ -180,4 +178,11 @@ func (repo CocktailRepository) FindByMaterials(
 	}
 
 	return cocktailMap, nil
+}
+
+func (repo CocktailRepository) FindImage(
+	userID string,
+	cocktailID string,
+) (string, error) {
+	return cocktailID, nil
 }
