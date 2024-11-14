@@ -431,10 +431,76 @@ paths:
                   error:
                     type: string
 
+  /auth/cocktail_images:
+    post:
+      tags:
+        - カクテル画像
+      description: 認証ユーザーによるカクテル画像パスの保存
+      operationId: saveCocktailImageWithAuth
+      security:
+        - cookieAuth: ["/loginでログインすることでBearerにJWTがセットされていること"]
+      parameters:
+      - in: query
+        name: materials
+        description: materials={材料ID}の形式で取得するカクテル一覧にフィルターを付けられる
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - cocktail_id
+                - image
+              properties:
+                name:
+                  type: string
+                cocktail_id:
+                  type: string
+                image:
+                  type: string
+      responses:
+        "201":
+          description: カクテル画像パスの保存に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_id:
+                    type: string
+                  user_id:
+                    type: string
+                  cocktail_id:
+                    type: string
+                  image:
+                    type: string
+        "400":
+          description: リクエストが間違い
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
 components:
   securitySchemes:  # 認証が必要なエンドポイントに付加
-    cookieAuth:
-      description: Cookie認証
-      type: apiKey
-      in: cookie
-      name: cookieAuthByJWT
+    Bearer:
+      description: BearerでのJWT認証
+      type: http
+      scheme: bearer
