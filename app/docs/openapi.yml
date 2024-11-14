@@ -10,63 +10,6 @@ servers:
     description: 開発用サーバー
 
 paths:
-  /users:
-    post:
-      tags:
-        - サインアップ・ログイン
-      description: 新規ユーザー登録を行う
-      operationId: createUser
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-                - password
-              properties:
-                name:
-                  type: string
-                  minLength: 1
-                  maxLength: 20
-                password:
-                  type: string
-                  format: password
-      responses:
-        "201":
-          description: 新規ユーザー登録に成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  password:
-                    type: string
-                    format: password
-        "400":
-          description: リクエストが間違い
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        "500":
-          description: サーバーエラー
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-
   /login:
     post:
       tags:
@@ -130,6 +73,251 @@ paths:
                   error:
                     type: string
 
+  /users:
+    post:
+      tags:
+        - サインアップ・ログイン
+      description: 新規ユーザー登録を行う
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - password
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 20
+                password:
+                  type: string
+                  format: password
+      responses:
+        "201":
+          description: 新規ユーザー登録に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  password:
+                    type: string
+                    format: password
+        "400":
+          description: リクエストが間違い
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /auth/users:
+    get:
+      tags:
+        - ストーリーモード
+      description: ユーザー情報取得 (ストーリーモードでクリア状況の取得)
+      operationId: authFindUser
+      security:
+        - cookieAuth: ["/loginでログインすることでヘッダーのBearerにJWTがセットされていること"]
+      responses:
+        "200":
+          description: ユーザー情報の取得に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  password:
+                    type: string
+                  story:
+                    type: integer
+        "401":
+          description: 認証失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /auth/users/story:
+    post:
+      tags:
+        - ストーリーモード
+      description: ユーザーのストーリー攻略状況を更新
+      operationId: authUpdateUserStory
+      security:
+        - cookieAuth: ["/loginでログインすることでヘッダーのBearerにJWTがセットされていること"]
+      responses:
+        "201":
+          description: ユーザーのストーリー攻略状況の更新に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                  story:
+                    type: integer
+        "401":
+          description: 認証失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /cocktails/individual:
+    get:
+      tags:
+        - カクテル
+      description: カクテルIDからカクテル情報の取得
+      operationId: getCocktail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: カクテルIDからカクテル情報の取得に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  materials:
+                    type: array
+                    description: カクテルに用いる材料の配列
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        amount:
+                          type: integer
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /auth/cocktails/individual:
+    get:
+      tags:
+        - カクテル
+      description: 認証付きでカクテルIDからカクテル情報の取得
+      operationId: getCocktailWithAuth
+      security:
+        - cookieAuth: ["/loginでログインすることでBearerにJWTがセットされていること"]
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: カクテルIDからカクテル情報の取得に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  image:
+                    type: string
+                  materials:
+                    type: array
+                    description: カクテルに用いる材料の配列
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        amount:
+                          type: integer
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
   /cocktails/list:
     get:
       tags:
@@ -148,27 +336,33 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  description:
-                    type: string
-                  image:
-                    type: string
-                  materials:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      amount:
-                        type: integer
+                type: array
+                description: カクテルの配列
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image:
+                      type: string
+                    materials:
+                      type: array
+                      description: 材料の配列
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          amount:
+                            type: integer
         "500":
           description: サーバーエラー
           content:
@@ -186,8 +380,7 @@ paths:
       description: 認証ユーザーによるカクテル一覧の取得
       operationId: getCocktailsByAuth
       security:
-        - cookieAuth: ["/loginでログインすることでcookieにJWTがセットされていること"]
-      
+        - cookieAuth: ["/loginでログインすることでBearerにJWTがセットされていること"]
       parameters:
       - in: query
         name: materials
@@ -201,27 +394,100 @@ paths:
           content:
             application/json:
               schema:
+                type: array
+                description: カクテルの配列
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image:
+                      type: string
+                    materials:
+                      type: array
+                      description: カクテルの配列
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          amount:
+                            type: integer
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
                 type: object
                 properties:
-                  id:
+                  error:
                     type: string
-                  name:
+
+  /auth/cocktail_images:
+    post:
+      tags:
+        - カクテル画像
+      description: 認証ユーザーによるカクテル画像パスの保存
+      operationId: saveCocktailImageWithAuth
+      security:
+        - cookieAuth: ["/loginでログインすることでBearerにJWTがセットされていること"]
+      parameters:
+      - in: query
+        name: materials
+        description: materials={材料ID}の形式で取得するカクテル一覧にフィルターを付けられる
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - cocktail_id
+                - image
+              properties:
+                name:
+                  type: string
+                cocktail_id:
+                  type: string
+                image:
+                  type: string
+      responses:
+        "201":
+          description: カクテル画像パスの保存に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_id:
                     type: string
-                  description:
+                  user_id:
+                    type: string
+                  cocktail_id:
                     type: string
                   image:
                     type: string
-                  materials:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                      name:
-                        type: string
-                      description:
-                        type: string
-                      amount:
-                        type: integer
+        "400":
+          description: リクエストが間違い
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         "500":
           description: サーバーエラー
           content:
@@ -234,8 +500,7 @@ paths:
 
 components:
   securitySchemes:  # 認証が必要なエンドポイントに付加
-    cookieAuth:
-      description: Cookie認証
-      type: apiKey
-      in: cookie
-      name: cookieAuthByJWT
+    Bearer:
+      description: BearerでのJWT認証
+      type: http
+      scheme: bearer
