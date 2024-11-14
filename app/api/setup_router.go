@@ -27,9 +27,11 @@ func SetupRouter(db *sql.DB) {
 	// リポジトリ
 	cocktailRepository := repository.NewCocktailRepository(db)
 	// ユースケース
+	findCocktailUc := usecase.NewFindCocktail(cocktailRepository)
 	findCocktailListUc := usecase.NewFindCocktailList(cocktailRepository)
 	saveCocktailImageUd := usecase.NewSaveCocktailImage(cocktailRepository)
 	// コントローラ
+	findCocktailCon := controller.NewFindCocktail(findCocktailUc)
 	findCocktailListCon := controller.NewFindCocktailList(findCocktailListUc)
 	saveCocktailImageCon := controller.NewSaveCocktailImage(saveCocktailImageUd)
 
@@ -73,6 +75,8 @@ func SetupRouter(db *sql.DB) {
 	r.POST("/users", createUserCon.Execute)
 
 	// /cocktails
+	r.GET("/cocktails/:id", findCocktailCon.Execute)               // 認証なしでカクテル取得
+	authRouter.GET("/cocktails/:id", findCocktailCon.Execute)      // 認証ありでカクテル取得
 	r.GET("/cocktails/list", findCocktailListCon.Execute)          // 認証なしでカクテル一覧取得
 	authRouter.GET("/cocktails/list", findCocktailListCon.Execute) // 認証ありでカクテル一覧取得
 
