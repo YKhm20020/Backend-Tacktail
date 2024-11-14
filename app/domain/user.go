@@ -9,11 +9,14 @@ type User struct {
 	id       string
 	name     string
 	password string
+	story    int
 }
 
 type UserRepository interface {
 	Create(User) (User, error)
+	UpdateStory(string) error
 	FindByName(string) (User, error)
+	FindByID(string) (User, error)
 }
 
 func NewUser(
@@ -29,26 +32,32 @@ func NewUser(
 		return User{}
 	}
 
-	return newUser(id, name, string(hash_pass))
+	// ストーリーモードのクリア状況を初期化
+	story := 0
+
+	return newUser(id, name, string(hash_pass), story)
 }
 
 func ReUser(
 	id string,
 	name string,
 	password string,
+	story int,
 ) User {
-	return newUser(id, name, password)
+	return newUser(id, name, password, story)
 }
 
 func newUser(
 	id string,
 	name string,
 	password string,
+	story int,
 ) User {
 	return User{
 		id:       id,
 		name:     name,
 		password: password,
+		story:    story,
 	}
 }
 
@@ -62,6 +71,10 @@ func (user User) Name() string {
 
 func (user User) Password() string {
 	return user.password
+}
+
+func (user User) Story() int {
+	return user.story
 }
 
 func (user User) IsValidPassword(password string) bool {

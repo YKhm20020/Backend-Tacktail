@@ -6,6 +6,7 @@ type dbUser struct {
 	id       string
 	name     string
 	password string
+	story    int
 }
 
 type dbCocktail struct {
