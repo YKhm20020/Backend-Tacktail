@@ -18,10 +18,12 @@ func SetupRouter(db *sql.DB) {
 	userRepository := repository.NewUserRepository(db)
 	// ユースケース
 	createUserUc := usecase.NewCreateUser(userRepository)
+	updateClearUc := usecase.NewUpdateClear(userRepository)
 	loginUc := usecase.NewLogin(userRepository)
 	findUserUc := usecase.NewFindUser(userRepository)
 	// コントローラ
 	createUserCon := controller.NewCreateUser(createUserUc)
+	updateClearCon := controller.NewUpdateClear(updateClearUc)
 	loginCon := controller.NewLogin(loginUc)
 	findUserCon := controller.NewFindUser(findUserUc)
 
@@ -76,6 +78,7 @@ func SetupRouter(db *sql.DB) {
 	// /users
 	r.POST("/users", createUserCon.Execute)
 	authRouter.GET("/users", findUserCon.Execute)
+	authRouter.POST("/users/story", updateClearCon.Execute)
 
 	// /cocktails
 	r.GET("/cocktails/individual/:id", findCocktailCon.Execute)          // 認証なしでカクテル取得
