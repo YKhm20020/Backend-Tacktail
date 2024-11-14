@@ -49,7 +49,13 @@ func (uc SaveCocktailImage) Execute(input SaveCocktailImageInput) (SaveCocktailI
 		return SaveCocktailImageOutput{}, err
 	}
 
-	cocktailImageID, err = uc.repo.InsertCocktailImage(ulid.Make().String(), input.UserID, input.CocktailID, input.Image)
+	cocktailImageID, err = uc.repo.InsertCocktailImage(
+		ulid.Make().String(),
+		input.UserID,
+		input.CocktailID,
+		input.Image,
+	)
+
 	if err != nil {
 		return SaveCocktailImageOutput{}, err
 	}
