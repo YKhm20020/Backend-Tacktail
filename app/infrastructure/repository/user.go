@@ -32,7 +32,27 @@ func (repo UserRepository) Create(user domain.User) (domain.User, error) {
 
 func (repo UserRepository) FindByName(name string) (domain.User, error) {
 	query := `
-		SELECT id, name, password FROM users WHERE name=$1;
+		SELECT id, name, password, story FROM users WHERE name=$1;
+	`
+
+	var dbUser dbUser
+	err := repo.db.QueryRow(query, name).Scan(&dbUser.id, &dbUser.name, &dbUser.password, &dbUser.story)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return domain.User{}, errors.New("not found user")
+		}
+		return domain.User{}, err
+	}
+
+	user := domain.ReUser(dbUser.id, dbUser.name, dbUser.password, dbUser.story)
+
+	return user, nil
+}
+
+func (repo UserRepository) FindByID(id string) (domain.User, error) {
+	query := `
+		SELECT id, name, password, story FROM users WHERE id=$1;
 	`
 
 	var dbUser dbUser
