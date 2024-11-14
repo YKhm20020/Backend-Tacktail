@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 
 	"github.com/YKhm20020/Backend-Tacktail/domain"
@@ -20,13 +21,26 @@ func NewCocktailRepository(db *sql.DB) domain.CocktailRepository {
 
 func (repo CocktailRepository) InsertCocktailImage(
 	cocktailImageID string,
+	userID string,
+	cocktailID string,
 	image string,
 ) (string, error) {
+	query := `
+		INSERT INTO cocktail_images (id, name, password) VALUES ($1, $2, $3);
+	`
+	_, err := repo.db.Exec(query, user.ID(), user.Name(), user.Password())
+
+	if err != nil {
+		return domain.User{}, err
+	}
+
 	return cocktailImageID, nil
 }
 
 func (repo CocktailRepository) UpdateCocktailImage(
 	cocktailImageID string,
+	userID string,
+	cocktailID string,
 	image string,
 ) (string, error) {
 	return cocktailImageID, nil
@@ -184,5 +198,19 @@ func (repo CocktailRepository) FindImage(
 	userID string,
 	cocktailID string,
 ) (string, error) {
+	query := `
+		SELECT id FROM cocktail_images WHERE cocktailID=$1 AND userID=$2;
+	`
+
+	var dbCocktailImage dbCocktailImage
+	err := repo.db.QueryRow(query, cocktailID, userID).Scan(&dbCocktailImage.id)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", errors.New("not found image")
+		}
+		return "", err
+	}
+
 	return cocktailID, nil
 }
