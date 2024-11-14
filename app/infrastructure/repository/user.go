@@ -19,9 +19,9 @@ func NewUserRepository(db *sql.DB) domain.UserRepository {
 
 func (repo UserRepository) Create(user domain.User) (domain.User, error) {
 	query := `
-		INSERT INTO users (id, name, password) VALUES ($1, $2, $3);
+		INSERT INTO users (id, name, password, story) VALUES ($1, $2, $3, $4);
 	`
-	_, err := repo.db.Exec(query, user.ID(), user.Name(), user.Password())
+	_, err := repo.db.Exec(query, user.ID(), user.Name(), user.Password(), user.Story())
 
 	if err != nil {
 		return domain.User{}, err
