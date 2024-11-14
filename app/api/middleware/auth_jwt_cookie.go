@@ -5,39 +5,26 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
 
-func AuthJWT() gin.HandlerFunc {
+func AuthJWTWithCookie() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		// ヘッダーからjwtを取得
-		authorizationHeader := ctx.Request.Header.Get("Authorization")
-		if authorizationHeader == "" {
-			// ヘッダーのAuthorizationが空
+		// cookieからjwtを取得
+		tokenString, err := ctx.Cookie("jwt")
+		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
 				"error":   errors.New("unauthorized").Error(),
-				"message": "ヘッダー内のAuthorizationがない",
-			})
-			ctx.Abort()
-			return
-		}
-
-		contents := strings.Split(authorizationHeader, " ")
-		if len(contents) != 2 || contents[0] != "Bearer" {
-			// AuthorizationにBearerが存在しない
-			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error":   errors.New("unauthorized").Error(),
-				"message": "AuthorizationにBearerが存在しない",
+				"message": "cookieからjwtの検出に失敗",
 			})
 			ctx.Abort()
 			return
 		}
 
 		// jwtの検証
-		token, err := jwt.Parse(contents[1], func(t *jwt.Token) (interface{}, error) {
+		token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
 			if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
 				return nil, fmt.Errorf("unexpected signing method: %v", t.Header["alg"])
 			}
@@ -71,24 +58,4 @@ func AuthJWT() gin.HandlerFunc {
 		// 認証を突破!!
 		ctx.Next()
 	}
-}
-
-func extractUser(token *jwt.Token) (string, string, error) {
-	claims, ok := token.Claims.(jwt.MapClaims)
-
-	if !ok {
-		return "", "", nil
-	}
-
-	userName, ok := claims["user_name"].(string)
-	if !ok {
-		return "", "", nil
-	}
-
-	userID, ok := claims["user_id"].(string)
-	if !ok {
-		return "", "", nil
-	}
-
-	return userName, userID, nil
 }

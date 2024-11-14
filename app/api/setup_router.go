@@ -39,10 +39,10 @@ func SetupRouter(db *sql.DB) {
 			"Content-Type",
 			// "Content-Length",
 			// "Accept-Encoding",
-			// "Authorization",
+			"Authorization",
 			// "accessToken",
-			"Set-Cookie",
-			"Cookie",
+			// "Set-Cookie",
+			// "Cookie",
 		},
 		AllowOrigins: []string{
 			"http://localhost:3000",

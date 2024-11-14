@@ -55,15 +55,21 @@ func (con Login) Execute(ctx *gin.Context) {
 		return
 	}
 
-	ctx.SetSameSite((http.SameSiteNoneMode))
+	// cookie認証じゃなくなったのでいらない
+	// ctx.SetSameSite((http.SameSiteNoneMode))
 
 	// cookieにjwtをセット
-	if product := os.Getenv(("PRODUCTION")); product == "" {
-		// 開発用サーバー
-		ctx.SetCookie("jwt", tokenString, 3600, "/", "localhost", false, true)
-	} else {
-		// APIサーバーのデプロイ先
-		ctx.SetCookie("jwt", tokenString, 3600, "/", "", true, true)
-	}
-	ctx.JSON(http.StatusOK, user)
+	// if product := os.Getenv(("PRODUCTION")); product == "" {
+	// 	// 開発用サーバー
+	// 	ctx.SetCookie("jwt", tokenString, 3600, "/", "localhost", false, true)
+	// } else {
+	// 	// APIサーバーのデプロイ先
+	// 	ctx.SetCookie("jwt", tokenString, 3600, "/", "", true, true)
+	// }
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"id":    user.Id,
+		"name":  user.Name,
+		"token": tokenString,
+	})
 }
