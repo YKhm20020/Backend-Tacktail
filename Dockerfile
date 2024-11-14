@@ -1,13 +1,11 @@
 FROM golang:1.23.1-alpine3.20
 
-COPY ./app /go/app/
-
-WORKDIR /go/app/
+WORKDIR /app
 COPY . .
 
 RUN go mod download && go mod tidy
-RUN go build -o main .
+RUN go build -o main ./cmd/main.go
 
-EXPOSE 8080
+EXPOSE $PORT
 
-CMD ["./main.go"]
+CMD ["/app/main"]

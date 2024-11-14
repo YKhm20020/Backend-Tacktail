@@ -39,7 +39,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           TAG=$(echo $GITHUB_SHA | head -c7)
-          gcloud run deploy web-push-demo \
+          gcloud run deploy tacktail-backend \
             --image ${IMAGE_NAME}:${TAG} \
             --platform managed \
             --region ${GCP_REGION} \
