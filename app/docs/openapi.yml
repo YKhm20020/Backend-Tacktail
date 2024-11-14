@@ -130,6 +130,49 @@ paths:
                   error:
                     type: string
 
+  /auth/users:
+    get:
+      tags:
+        - ストーリーモード
+      description: ユーザー情報取得 (ストーリーモードでクリア状況の取得)
+      operationId: authFindUser
+      security:
+        - cookieAuth: ["/loginでログインすることでヘッダーのBearerにJWTがセットされていること"]
+      responses:
+        "200":
+          description: ユーザー情報の取得に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  password:
+                    type: string
+                  story:
+                    type: integer
+        "401":
+          description: 認証失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
   /cocktails/list:
     get:
       tags:
