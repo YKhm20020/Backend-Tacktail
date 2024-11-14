@@ -9,9 +9,11 @@ type Cocktail struct {
 }
 
 type CocktailRepository interface {
-	UpdateCocktailImage(string, string, string) error              // 引数はユーザーID、カクテルID、画像パス
-	FindAll(string) (map[string]Cocktail, error)                   // 引数はユーザーIDで、すべてのカクテルを取得
-	FindByMaterials(string, []string) (map[string]Cocktail, error) // 引数はユーザーIDと材料IDのリスト
+	InsertCocktailImage(string, string, string, string) (string, error) // 引数はカクテル画像ID、ユーザーID、カクテルID、画像パスで、カクテル画像IDを取得
+	UpdateCocktailImage(string, string) (string, error)                 // 引数はカクテル画像ID、画像パスで、カクテル画像IDを取得
+	FindAll(string) (map[string]Cocktail, error)                        // 引数はユーザーIDで、すべてのカクテルを取得
+	FindByMaterials(string, []string) (map[string]Cocktail, error)      // 引数はユーザーIDと材料IDのリスト
+	FindImage(string, string) (string, error)                           // 引数はユーザーID、カクテルIDで、カクテル画像IDを取得
 	// FindByID(string) (Cocktail, error)                    // 引数はカクテルID
 }
 

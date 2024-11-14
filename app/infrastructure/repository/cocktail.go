@@ -2,6 +2,7 @@ package repository
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 
 	"github.com/YKhm20020/Backend-Tacktail/domain"
@@ -18,12 +19,43 @@ func NewCocktailRepository(db *sql.DB) domain.CocktailRepository {
 	}
 }
 
-func (repo CocktailRepository) UpdateCocktailImage(
+func (repo CocktailRepository) InsertCocktailImage(
+	cocktailImageID string,
 	userID string,
 	cocktailID string,
 	image string,
-) error {
-	return nil
+) (string, error) {
+	query := `
+		INSERT INTO
+			cocktail_images (id, cocktailID, userID, image)
+		VALUES
+			($1, $2, $3, $4);
+	`
+	_, err := repo.db.Exec(query, cocktailImageID, cocktailID, userID, image)
+
+	if err != nil {
+		return "", err
+	}
+
+	return cocktailImageID, nil
+}
+
+func (repo CocktailRepository) UpdateCocktailImage(
+	cocktailImageID string,
+	image string,
+) (string, error) {
+	query := `
+		UPDATE cocktail_images SET image = $1 WHERE id = $2;
+	`
+
+	// fmt.Println(image, cocktailImageID)
+	_, err := repo.db.Exec(query, image, cocktailImageID)
+
+	if err != nil {
+		return "", err
+	}
+
+	return cocktailImageID, nil
 }
 
 func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktail, error) {
@@ -172,4 +204,25 @@ func (repo CocktailRepository) FindByMaterials(
 	}
 
 	return cocktailMap, nil
+}
+
+func (repo CocktailRepository) FindImage(
+	userID string,
+	cocktailID string,
+) (string, error) {
+	query := `
+		SELECT id FROM cocktail_images WHERE cocktailID=$1 AND userID=$2;
+	`
+
+	var dbCocktailImage dbCocktailImage
+	err := repo.db.QueryRow(query, cocktailID, userID).Scan(&dbCocktailImage.id)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return "", errors.New("not found image")
+		}
+		return "", err
+	}
+
+	return dbCocktailImage.id, nil
 }

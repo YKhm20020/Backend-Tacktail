@@ -23,6 +23,16 @@ func SetupRouter(db *sql.DB) {
 	createUserCon := controller.NewCreateUser(createUserUc)
 	loginCon := controller.NewLogin(loginUc)
 
+	// cocktails
+	// リポジトリ
+	cocktailRepository := repository.NewCocktailRepository(db)
+	// ユースケース
+	findCocktailListUc := usecase.NewFindCocktailList(cocktailRepository)
+	saveCocktailImageUd := usecase.NewSaveCocktailImage(cocktailRepository)
+	// コントローラ
+	findCocktailListCon := controller.NewFindCocktailList(findCocktailListUc)
+	saveCocktailImageCon := controller.NewSaveCocktailImage(saveCocktailImageUd)
+
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
@@ -53,14 +63,6 @@ func SetupRouter(db *sql.DB) {
 		MaxAge:           24 * time.Hour,
 	}))
 
-	// cocktails
-	// リポジトリ
-	cocktailRepository := repository.NewCocktailRepository(db)
-	// ユースケース
-	findCocktailListUc := usecase.NewFindCocktailList(cocktailRepository)
-	// コントローラ
-	findCocktailListCon := controller.NewFindCocktailList(findCocktailListUc)
-
 	// 認証を必要とするルーティングを定義
 	authRouter := r.Group("/auth", middleware.AuthJWT())
 
@@ -73,6 +75,9 @@ func SetupRouter(db *sql.DB) {
 	// /cocktails
 	r.GET("/cocktails/list", findCocktailListCon.Execute)          // 認証なしでカクテル一覧取得
 	authRouter.GET("/cocktails/list", findCocktailListCon.Execute) // 認証ありでカクテル一覧取得
+
+	// /cocktail_images
+	authRouter.POST("/cocktail_images", saveCocktailImageCon.Execute)
 
 	r.Run()
 }
