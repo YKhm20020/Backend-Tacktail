@@ -26,7 +26,7 @@ func AuthJWT() gin.HandlerFunc {
 		}
 
 		contents := strings.Split(authorizationHeader, " ")
-		if len(contents) != 2 || contents[0] == "Bearer" {
+		if len(contents) != 2 || contents[0] != "Bearer" {
 			// AuthorizationにBearerが存在しない
 			ctx.JSON(http.StatusUnauthorized, gin.H{
 				"error":   errors.New("unauthorized").Error(),
