@@ -14,7 +14,7 @@ type CocktailRepository interface {
 	FindAll(string) (map[string]Cocktail, error)                        // 引数はユーザーIDで、すべてのカクテルを取得
 	FindByMaterials(string, []string) (map[string]Cocktail, error)      // 引数はユーザーIDと材料IDのリスト
 	FindImage(string, string) (string, error)                           // 引数はユーザーID、カクテルIDで、カクテル画像IDを取得
-	// FindByID(string) (Cocktail, error)                    // 引数はカクテルID
+	FindByID(string) (Cocktail, error)                                  // 引数はカクテルID
 }
 
 func NewCocktail(
