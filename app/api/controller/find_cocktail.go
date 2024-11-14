@@ -33,7 +33,7 @@ func (con FindCocktail) Execute(ctx *gin.Context) {
 
 	output, err := con.uc.Execute(input)
 	if err != nil {
-		ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
+		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 

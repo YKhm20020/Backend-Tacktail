@@ -212,6 +212,61 @@ paths:
                   error:
                     type: string
 
+  /cocktails/individual:
+    get:
+      tags:
+        - カクテル
+      description: カクテルIDからカクテル情報の取得
+      operationId: getCocktail
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: カクテルIDからカクテル情報の取得に成功
+          content:
+            application/json:
+              schema:
+                type: array
+                description: カクテルの配列
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    image:
+                      type: string
+                    materials:
+                      type: array
+                      description: カクテルに用いる材料の配列
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                          name:
+                            type: string
+                          description:
+                            type: string
+                          amount:
+                            type: integer
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
   /cocktails/list:
     get:
       tags:
