@@ -19,7 +19,7 @@ func NewSaveCocktailImage(
 	}
 }
 
-func (con SaveCocktailImage) Execute(ctx gin.Context) {
+func (con SaveCocktailImage) Execute(ctx *gin.Context) {
 	var input usecase.SaveCocktailImageInput
 
 	if err := ctx.ShouldBindJSON(&input); err != nil {
