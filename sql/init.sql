@@ -55,10 +55,10 @@ INSERT INTO users (id, name, password) VALUES ('user03_id', 'user03_name', 'user
 INSERT INTO users (id, name, password) VALUES ('user04_id', 'user04_name', 'user04_password');
 INSERT INTO users (id, name, password) VALUES ('user05_id', 'user05_name', 'user05_password');
 
-INSERT INTO cocktails (id, name, description) VALUES (0, 'モスコミュール', 'モスコミュールの説明');
-INSERT INTO cocktails (id, name, description) VALUES (1, 'スクリュードライバー', 'スクリュードライバーの説明');
-INSERT INTO cocktails (id, name, description) VALUES (2, 'テキーラサンライズ', 'テキーラサンライズの説明');
-INSERT INTO cocktails (id, name, description) VALUES (3, 'ロングアイランドアイスティー', 'ロングアイランドアイスティーの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail00_id', 'モスコミュール', 'モスコミュールの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail01_id', 'スクリュードライバー', 'スクリュードライバーの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail02_id', 'テキーラサンライズ', 'テキーラサンライズの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('cocktail03_id', 'ロングアイランドアイスティー', 'ロングアイランドアイスティーの説明');
 
 INSERT INTO materials (id, name, description) VALUES ('material00_id', 'ウォッカ', 'ウォッカの説明');
 INSERT INTO materials (id, name, description) VALUES ('material01_id', 'ジンジャーエール', 'ジンジャーエールの説明');
@@ -71,26 +71,26 @@ INSERT INTO materials (id, name, description) VALUES ('material07_id', 'コア�
 INSERT INTO materials (id, name, description) VALUES ('material08_id', 'コーラ', 'コーラの説明');
 INSERT INTO materials (id, name, description) VALUES ('material09_id', 'レモン果汁', 'レモン果汁の説明');
 
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes00_id', 0, 'material00_id', 2);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', 0, 'material01_id', 8);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes02_id', 1, 'material00_id', 2);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes03_id', 1, 'material02_id', 8);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes04_id', 2, 'material03_id', 3);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes05_id', 2, 'material02_id', 6);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes06_id', 2, 'material04_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes07_id', 3, 'material03_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes08_id', 3, 'material05_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes09_id', 3, 'material06_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes10_id', 3, 'material07_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes11_id', 3, 'material08_id', 4);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes12_id', 3, 'material09_id', 1);
-INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes13_id', 3, 'material00_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes00_id', 'cocktail00_id', 'material00_id', 2);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', 'cocktail00_id', 'material01_id', 8);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes02_id', 'cocktail01_id', 'material00_id', 2);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes03_id', 'cocktail01_id', 'material02_id', 8);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes04_id', 'cocktail02_id', 'material03_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes05_id', 'cocktail02_id', 'material02_id', 6);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes06_id', 'cocktail02_id', 'material04_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes07_id', 'cocktail03_id', 'material03_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes08_id', 'cocktail03_id', 'material05_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes09_id', 'cocktail03_id', 'material06_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes10_id', 'cocktail03_id', 'material07_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes11_id', 'cocktail03_id', 'material08_id', 4);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes12_id', 'cocktail03_id', 'material09_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes13_id', 'cocktail03_id', 'material00_id', 1);
 
-INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image00_id', 0, 'user00_id', '/images/user00_モスコミュール画像.png');
-INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image01_id', 1, 'user00_id', '/images/user00_スクリュードライバー画像.png');
-INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image02_id', 0, 'user01_id', '/images/user01_モスコミュール画像.png');
+INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image00_id', 'cocktail00_id', 'user00_id', '/images/user00_モスコミュール画像.png');
+INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image01_id', 'cocktail01_id', 'user00_id', '/images/user00_スクリュードライバー画像.png');
+INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image02_id', 'cocktail00_id', 'user01_id', '/images/user01_モスコミュール画像.png');
 
-INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story00_id', 0, 'trivia00', 1);
-INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story01_id', 1, 'trivia01', 2);
-INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story02_id', 2, 'trivia02', 3);
-INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story03_id', 3, 'trivia03', 4);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story00_id', 'cocktail00_id', 'trivia00', 1);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story01_id', 'cocktail01_id', 'trivia01', 2);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story02_id', 'cocktail02_id', 'trivia02', 3);
+INSERT INTO stories (id, cocktailID, trivia, day) VALUES ('story03_id', 'cocktail03_id', 'trivia03', 4);
