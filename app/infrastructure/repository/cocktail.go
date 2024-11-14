@@ -124,6 +124,10 @@ func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktai
 	return cocktailMap, nil
 }
 
+func (repo CocktailRepository) FindByID(id string) (domain.Cocktail, error) {
+	return domain.Cocktail{}, nil
+}
+
 func (repo CocktailRepository) FindByMaterials(
 	userID string,
 	materialIDs []string,
