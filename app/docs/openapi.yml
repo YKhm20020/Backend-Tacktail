@@ -173,6 +173,45 @@ paths:
                   error:
                     type: string
 
+  /auth/users/story:
+    post:
+      tags:
+        - ストーリーモード
+      description: ユーザーのストーリー攻略状況を更新
+      operationId: authUpdateUserStory
+      security:
+        - cookieAuth: ["/loginでログインすることでヘッダーのBearerにJWTがセットされていること"]
+      responses:
+        "201":
+          description: ユーザーのストーリー攻略状況の更新に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                  story:
+                    type: integer
+        "401":
+          description: 認証失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
   /cocktails/list:
     get:
       tags:
