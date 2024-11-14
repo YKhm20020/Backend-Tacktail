@@ -14,7 +14,9 @@ type User struct {
 
 type UserRepository interface {
 	Create(User) (User, error)
+	UpdateStory(string) error
 	FindByName(string) (User, error)
+	FindByID(string) (User, error)
 }
 
 func NewUser(
