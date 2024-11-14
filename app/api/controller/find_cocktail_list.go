@@ -23,7 +23,7 @@ func (con FindCocktailList) Execute(ctx *gin.Context) {
 	// /cocktails/list?materials={material_id}?materials={material_id} でフィルターできるようにするため
 	input.MaterialIDs = ctx.QueryArray("materials")
 
-	// cookieからユーザーIDを取得
+	// ヘッダー内のtokenからユーザーIDを取得
 	user_id, exists := ctx.Get("user_id")
 	if exists {
 		input.UserID = user_id.(string)
