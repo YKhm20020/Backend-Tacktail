@@ -10,63 +10,6 @@ servers:
     description: 開発用サーバー
 
 paths:
-  /users:
-    post:
-      tags:
-        - サインアップ・ログイン
-      description: 新規ユーザー登録を行う
-      operationId: createUser
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - name
-                - password
-              properties:
-                name:
-                  type: string
-                  minLength: 1
-                  maxLength: 20
-                password:
-                  type: string
-                  format: password
-      responses:
-        "201":
-          description: 新規ユーザー登録に成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  name:
-                    type: string
-                  password:
-                    type: string
-                    format: password
-        "400":
-          description: リクエストが間違い
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        "500":
-          description: サーバーエラー
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-
   /login:
     post:
       tags:
@@ -113,6 +56,63 @@ paths:
                     type: string
         "401":
           description: 認証失敗
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        "500":
+          description: サーバーエラー
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /users:
+    post:
+      tags:
+        - サインアップ・ログイン
+      description: 新規ユーザー登録を行う
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - password
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 20
+                password:
+                  type: string
+                  format: password
+      responses:
+        "201":
+          description: 新規ユーザー登録に成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  password:
+                    type: string
+                    format: password
+        "400":
+          description: リクエストが間違い
           content:
             application/json:
               schema:
@@ -186,8 +186,7 @@ paths:
       description: 認証ユーザーによるカクテル一覧の取得
       operationId: getCocktailsByAuth
       security:
-        - cookieAuth: ["/loginでログインすることでcookieにJWTがセットされていること"]
-      
+        - cookieAuth: ["/loginでログインすることでBearerにJWTがセットされていること"]
       parameters:
       - in: query
         name: materials
