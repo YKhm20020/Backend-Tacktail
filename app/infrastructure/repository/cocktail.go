@@ -39,10 +39,17 @@ func (repo CocktailRepository) InsertCocktailImage(
 
 func (repo CocktailRepository) UpdateCocktailImage(
 	cocktailImageID string,
-	userID string,
-	cocktailID string,
 	image string,
 ) (string, error) {
+	query := `
+		UPDATE cocktail_images SET image = $1 WHERE id = $2;
+	`
+	_, err := repo.db.Exec(query, image, cocktailImageID)
+
+	if err != nil {
+		return "", err
+	}
+
 	return cocktailImageID, nil
 }
 
