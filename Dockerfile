@@ -10,4 +10,4 @@ RUN go build -o main .
 
 EXPOSE $PORT
 
-CMD ["go run main.go"]
+CMD ["go", "run", "main.go"]
