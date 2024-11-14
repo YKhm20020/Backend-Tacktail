@@ -18,6 +18,14 @@ func NewCocktailRepository(db *sql.DB) domain.CocktailRepository {
 	}
 }
 
+func (repo CocktailRepository) InsertCocktailImage(
+	userID string,
+	cocktailID string,
+	image string,
+) error {
+	return nil
+}
+
 func (repo CocktailRepository) UpdateCocktailImage(
 	userID string,
 	cocktailID string,
