@@ -33,7 +33,7 @@ func NewFindCocktail(
 }
 
 func (uc FindCocktail) Execute(input FindCocktailInput) (FindCocktailOutput, error) {
-	cocktail, err := uc.repo.FindByID(input.UserID, input.ID)
+	cocktail, err := uc.repo.FindByID(input.ID, input.UserID)
 	if err != nil {
 		return FindCocktailOutput{}, err
 	}
