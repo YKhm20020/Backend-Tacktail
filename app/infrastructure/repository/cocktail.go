@@ -125,7 +125,66 @@ func (repo CocktailRepository) FindAll(userID string) (map[string]domain.Cocktai
 }
 
 func (repo CocktailRepository) FindByID(id string) (domain.Cocktail, error) {
-	return domain.Cocktail{}, nil
+	query := `
+		SELECT
+			cocktails.id, cocktails.name, cocktails.description, cocktail_images.image,
+				materials.id, materials.name, materials.description, recipes.amount
+		FROM
+			cocktails
+		LEFT JOIN
+			cocktail_images
+		ON
+			cocktails.id = cocktail_images.cocktailID
+		AND
+			cocktail_images.userID = $1
+		INNER JOIN
+			recipes
+		ON
+			cocktails.id = recipes.cocktailID
+		INNER JOIN
+			materials
+		ON
+			recipes.materialID = materials.id
+		WHERE
+			cocktails.id = $1;
+	`
+
+	rows, err := repo.db.Query(query, id)
+	if err != nil {
+		return domain.Cocktail{}, err
+	}
+
+	// クエリの実行結果をバインドするための変数
+	var dbCocktail dbCocktail
+	var dbMaterial dbMaterial
+	var dbCocktailImage dbCocktailImage
+	var dbRecipe dbRecipe
+
+	// 出力用材料構造体
+	materials := []domain.Material{}
+
+	for rows.Next() {
+		rows.Scan(
+			&dbCocktail.id,
+			&dbCocktail.name,
+			&dbCocktail.description,
+			&dbCocktailImage.image,
+			&dbMaterial.id,
+			&dbMaterial.name,
+			&dbMaterial.description,
+			&dbRecipe.amount,
+		)
+
+		// 材料ドメインのオブジェクトを生成
+		materials = append(materials,
+			domain.NewMaterial(dbMaterial.id, dbMaterial.name, dbMaterial.description, dbRecipe.amount),
+		)
+	}
+
+	// カクテルドメインのオブジェクトを生成
+	cocktail := domain.NewCocktail(dbCocktail.id, dbCocktail.name, dbCocktail.description, dbCocktailImage.image.String, materials)
+
+	return cocktail, nil
 }
 
 func (repo CocktailRepository) FindByMaterials(
