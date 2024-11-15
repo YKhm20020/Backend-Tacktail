@@ -34,7 +34,7 @@ CREATE TABLE cocktail_images (
   id VARCHAR(100) NOT NULL,
   cocktailID VARCHAR(100) NOT NULL,
   userID VARCHAR(100) NOT NULL,
-  image VARCHAR(100) NOT NULL,
+  image VARCHAR(500) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (cocktailID) REFERENCES cocktails(id),
   FOREIGN KEY (userID) REFERENCES users(id)
