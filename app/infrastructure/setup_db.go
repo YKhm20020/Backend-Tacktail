@@ -26,15 +26,11 @@ var (
 func SetupDB() *sql.DB {
 	if product := os.Getenv(("PRODUCTION")); product == "" {
 		// 開発環境
-
 		err := loadEnv()
 		if err != nil {
 			panic("開発環境での完了変数の取得に失敗")
 		}
 
-		if err != nil {
-			fmt.Println("fail to load .env file")
-		}
 		dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
 			host, user, password, dbname, port)
 
@@ -89,7 +85,7 @@ func connectWithConnector() (*sql.DB, error) {
 	// keep passwords and other secrets safe.
 	var (
 		dbUser                 = mustGetenv("DB_USER")                  // e.g. 'my-db-user'
-		dbPwd                  = mustGetenv("DB_PASS")                  // e.g. 'my-db-password'
+		dbPwd                  = mustGetenv("DB_PASSWORD")              // e.g. 'my-db-password'
 		dbName                 = mustGetenv("DB_NAME")                  // e.g. 'my-database'
 		instanceConnectionName = mustGetenv("INSTANCE_CONNECTION_NAME") // e.g. 'project:region:instance'
 		usePrivate             = os.Getenv("PRIVATE_IP")
