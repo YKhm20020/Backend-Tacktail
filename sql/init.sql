@@ -34,7 +34,7 @@ CREATE TABLE cocktail_images (
   id VARCHAR(100) NOT NULL,
   cocktailID VARCHAR(100) NOT NULL,
   userID VARCHAR(100) NOT NULL,
-  image VARCHAR(100) NOT NULL,
+  image VARCHAR(500) NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (cocktailID) REFERENCES cocktails(id),
   FOREIGN KEY (userID) REFERENCES users(id)
@@ -56,16 +56,20 @@ INSERT INTO users (id, name, password, story) VALUES ('user03_id', 'user03_name'
 INSERT INTO users (id, name, password, story) VALUES ('user04_id', 'user04_name', 'user04_password', 0);
 INSERT INTO users (id, name, password, story) VALUES ('user05_id', 'user05_name', 'user05_password', 0);
 
-INSERT INTO cocktails (id, name, description) VALUES ('0', 'モスコミュール', 'モスコミュールの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('1', 'スクリュードライバー', 'スクリュードライバーの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('2', 'テキーラサンライズ', 'テキーラサンライズの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('3', 'ロングアイランドアイスティー', 'ロングアイランドアイスティーの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('4', 'ジンバック', 'ジンバックの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('5', 'オレンジブロッサム', 'オレンジブロッサムの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('6', 'キューバリブレ', 'キューバリブレの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('7', 'カルーアミルク', 'カルーアミルクの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('8', 'オーロラ', 'オーロラの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('9', 'XYZ', 'XYZの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('0', 'モスコミュール', 'ライム果汁やカットライムを入れてもより爽やかな味わいとなります。');
+INSERT INTO cocktails (id, name, description) VALUES ('1', 'スクリュードライバー', 'ウォッカとオレンジジュースを混ぜた、爽やかで飲みやすいカクテル。');
+INSERT INTO cocktails (id, name, description) VALUES ('2', 'テキーラサンライズ', 'テキーラとオレンジジュース、グレナデンシロップを使った、色鮮やかで甘酸っぱいカクテル。美しいグラデーションが特徴です。。');
+INSERT INTO cocktails (id, name, description) VALUES ('3', 'ロングアイランドアイスティー', 'ジン、ウォッカ、ラム、テキーラ、トリプルセックにレモンジュースとコーラを加えた、強めで爽快なカクテルです。。');
+INSERT INTO cocktails (id, name, description) VALUES ('4', 'ジンバック', 'レモン果汁やレモンジュース、カットレモンを入れても美味しいです。');
+INSERT INTO cocktails (id, name, description) VALUES ('5', 'オレンジブロッサム', '柑橘の香りとジンの風味が絶妙に調和します。');
+INSERT INTO cocktails (id, name, description) VALUES ('6', 'キューバリブレ', '世界で最もオーダーが多いカクテルと呼ばれる。');
+INSERT INTO cocktails (id, name, description) VALUES ('7', 'カルーアミルク', 'コーヒー豆をスピリッツに漬け込んだお酒をコーヒーリキュールと呼びます。コーヒーリキュールと牛乳を割って作る飲みやすいカクテルです。');
+INSERT INTO cocktails (id, name, description) VALUES ('8', 'オーロラ', '材料をシェイカーでシェイクしてください。カシスとグレナンデンシロップの赤が混ざり合います。');
+INSERT INTO cocktails (id, name, description) VALUES ('9', 'XYZ', 'これ以上のカクテルは作れないという意味から「究極のカクテル」という意味で寝る前に飲まれがちなカクテルです。');
+INSERT INTO cocktails (id, name, description) VALUES ('10', 'シャーリーテンプル', 'シャーリーテンプルの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('11', 'ジンフィズ', 'お好みで少量の砂糖を入れてから、シェイカーでシェイクしてください。');
+INSERT INTO cocktails (id, name, description) VALUES ('12', 'シンデレラ', '甘酸っぱく、爽やかな味わいが特徴のノンアルコールカクテルです。');
+INSERT INTO cocktails (id, name, description) VALUES ('13', 'フルーツパンチ', '多種のフルーツジュースをミックスしたカクテルです。甘酸っぱく、軽やかな飲み口が特徴です。アルコールを加えることもあります。');
 
 INSERT INTO materials (id, name, description) VALUES ('material00_id', 'ウォッカ', 'ウォッカの説明');
 INSERT INTO materials (id, name, description) VALUES ('material01_id', 'ジンジャーエール', 'ジンジャーエールの説明');
@@ -83,6 +87,8 @@ INSERT INTO materials (id, name, description) VALUES ('material12_id', 'ミル�
 INSERT INTO materials (id, name, description) VALUES ('material13_id', 'カシス', 'カシスの説明');
 INSERT INTO materials (id, name, description) VALUES ('material14_id', 'グレープフルーツジュース', 'グレープフルーツジュースの説明');
 INSERT INTO materials (id, name, description) VALUES ('material15_id', 'グレナンデンシロップ', 'グレナンデンシロップの説明');
+INSERT INTO materials (id, name, description) VALUES ('material16_id', '炭酸水', '炭酸水の説明');
+INSERT INTO materials (id, name, description) VALUES ('material17_id', 'パイナップルジュース', 'パイナップルジュースの説明');
 
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes00_id', '0', 'material00_id', 2);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes01_id', '0', 'material01_id', 8);
@@ -115,6 +121,18 @@ INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes27_id',
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes28_id', '9', 'material05_id', 5);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes29_id', '9', 'material07_id', 2);
 INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes30_id', '9', 'material09_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes31_id', '10', 'material01_id', 8);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes32_id', '10', 'material15_id', 2);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes33_id', '11', 'material06_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes34_id', '11', 'material09_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes35_id', '11', 'material16_id', 6);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes36_id', '12', 'material02_id', 4);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes37_id', '12', 'material17_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes38_id', '12', 'material09_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes39_id', '13', 'material02_id', 5);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes40_id', '13', 'material17_id', 3);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes41_id', '13', 'material09_id', 1);
+INSERT INTO recipes (id, cocktailID, materialID, amount) VALUES ('recipes42_id', '13', 'material15_id', 1);
 
 INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image00_id', '0', 'user00_id', '/images/user00_モスコミュール画像.png');
 INSERT INTO cocktail_images (id, cocktailID, userID, image) VALUES ('cocktail_image01_id', '1', 'user00_id', '/images/user00_スクリュードライバー画像.png');
