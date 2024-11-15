@@ -56,20 +56,20 @@ INSERT INTO users (id, name, password, story) VALUES ('user03_id', 'user03_name'
 INSERT INTO users (id, name, password, story) VALUES ('user04_id', 'user04_name', 'user04_password', 0);
 INSERT INTO users (id, name, password, story) VALUES ('user05_id', 'user05_name', 'user05_password', 0);
 
-INSERT INTO cocktails (id, name, description) VALUES ('0', 'モスコミュール', 'モスコミュールの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('1', 'スクリュードライバー', 'スクリュードライバーの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('2', 'テキーラサンライズ', 'テキーラサンライズの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('3', 'ロングアイランドアイスティー', 'ロングアイランドアイスティーの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('4', 'ジンバック', 'ジンバックの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('5', 'オレンジブロッサム', 'オレンジブロッサムの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('6', 'キューバリブレ', 'キューバリブレの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('7', 'カルーアミルク', 'カルーアミルクの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('8', 'オーロラ', 'オーロラの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('9', 'XYZ', 'XYZの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('0', 'モスコミュール', 'ライム果汁やカットライムを入れてもより爽やかな味わいとなります。');
+INSERT INTO cocktails (id, name, description) VALUES ('1', 'スクリュードライバー', 'ウォッカとオレンジジュースを混ぜた、爽やかで飲みやすいカクテル。');
+INSERT INTO cocktails (id, name, description) VALUES ('2', 'テキーラサンライズ', 'テキーラとオレンジジュース、グレナデンシロップを使った、色鮮やかで甘酸っぱいカクテル。美しいグラデーションが特徴です。。');
+INSERT INTO cocktails (id, name, description) VALUES ('3', 'ロングアイランドアイスティー', 'ジン、ウォッカ、ラム、テキーラ、トリプルセックにレモンジュースとコーラを加えた、強めで爽快なカクテルです。。');
+INSERT INTO cocktails (id, name, description) VALUES ('4', 'ジンバック', 'レモン果汁やレモンジュース、カットレモンを入れても美味しいです。');
+INSERT INTO cocktails (id, name, description) VALUES ('5', 'オレンジブロッサム', '柑橘の香りとジンの風味が絶妙に調和します。');
+INSERT INTO cocktails (id, name, description) VALUES ('6', 'キューバリブレ', '世界で最もオーダーが多いカクテルと呼ばれる。');
+INSERT INTO cocktails (id, name, description) VALUES ('7', 'カルーアミルク', 'コーヒー豆をスピリッツに漬け込んだお酒をコーヒーリキュールと呼びます。コーヒーリキュールと牛乳を割って作る飲みやすいカクテルです。');
+INSERT INTO cocktails (id, name, description) VALUES ('8', 'オーロラ', '材料をシェイカーでシェイクしてください。カシスとグレナンデンシロップの赤が混ざり合います。');
+INSERT INTO cocktails (id, name, description) VALUES ('9', 'XYZ', 'これ以上のカクテルは作れないという意味から「究極のカクテル」という意味で寝る前に飲まれがちなカクテルです。');
 INSERT INTO cocktails (id, name, description) VALUES ('10', 'シャーリーテンプル', 'シャーリーテンプルの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('11', 'ジンフィズ', 'ジンフィズの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('12', 'シンデレラ', 'シンデレラの説明');
-INSERT INTO cocktails (id, name, description) VALUES ('13', 'フルーツパンチ', 'フルーツパンチの説明');
+INSERT INTO cocktails (id, name, description) VALUES ('11', 'ジンフィズ', 'お好みで少量の砂糖を入れてから、シェイカーでシェイクしてください。');
+INSERT INTO cocktails (id, name, description) VALUES ('12', 'シンデレラ', '甘酸っぱく、爽やかな味わいが特徴のノンアルコールカクテルです。');
+INSERT INTO cocktails (id, name, description) VALUES ('13', 'フルーツパンチ', '多種のフルーツジュースをミックスしたカクテルです。甘酸っぱく、軽やかな飲み口が特徴です。アルコールを加えることもあります。');
 
 INSERT INTO materials (id, name, description) VALUES ('material00_id', 'ウォッカ', 'ウォッカの説明');
 INSERT INTO materials (id, name, description) VALUES ('material01_id', 'ジンジャーエール', 'ジンジャーエールの説明');
