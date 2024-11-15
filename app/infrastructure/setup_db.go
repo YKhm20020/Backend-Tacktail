@@ -24,7 +24,7 @@ var (
 )
 
 func SetupDB() *sql.DB {
-	if product := os.Getenv(("PRODUCTION")); product == "" {
+	if product := os.Getenv("PRODUCTION"); product == "" {
 		// 開発環境
 		err := loadEnv()
 		if err != nil {
