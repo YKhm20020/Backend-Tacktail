@@ -53,8 +53,8 @@ func SetupRouter(db *sql.DB) {
 			"Access-Control-Allow-Credentials",
 			"Access-Control-Allow-Headers",
 			"Content-Type",
-			// "Content-Length",
-			// "Accept-Encoding",
+			"Content-Length",
+			"Accept-Encoding",
 			"Authorization",
 			// "accessToken",
 			// "Set-Cookie",
@@ -62,7 +62,7 @@ func SetupRouter(db *sql.DB) {
 		},
 		AllowOrigins: []string{
 			"http://localhost:3000",
-			"https://frontend-festival-booth.vercel.app",
+			"https://frontend-tacktail.vercel.app",
 		},
 		// cookieなどの情報を必要とするかどうか
 		AllowCredentials: true, // 本番環境でないと動かない
