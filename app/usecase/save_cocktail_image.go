@@ -10,7 +10,7 @@ type SaveCocktailImage struct {
 }
 
 type SaveCocktailImageInput struct {
-	UserID     string `json:"user_id" binding:"required"`
+	UserID     string
 	CocktailID string `json:"cocktail_id" binding:"required"`
 	Image      string `json:"image" binding:"required"`
 }
